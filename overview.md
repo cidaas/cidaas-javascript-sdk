@@ -12,17 +12,55 @@ sequenceDiagram
   participant CidaasSDK as Cidaas Javascript SDK
   participant CidaasAPI as Cidaas API
 
-User ->> ClientApp: Interact with App
+User ->> ClientApp: login to app
 
 activate ClientApp
-ClientApp ->> CidaasSDK: Call SDK Function
+ClientApp ->> CidaasSDK: call login function
+deactivate ClientApp
 
 activate CidaasSDK
-CidaasSDK ->> CidaasAPI: Call Cidaas API
+CidaasSDK ->> CidaasAPI: call cidaas API
 deactivate CidaasSDK
 
 activate CidaasAPI
-CidaasAPI ->> ClientApp: Redirect / Return Response
+CidaasAPI ->> User: redirect to login page
+User ->> CidaasAPI: do authentication
+CidaasAPI ->> ClientApp: redirect to main page
+deactivate CidaasAPI
+
+activate ClientApp
+ClientApp ->> CidaasSDK: call loginCallback()
+
+activate CidaasSDK
+CidaasSDK ->> CidaasAPI: change code with tokens
+deactivate CidaasSDK
+
+activate CidaasAPI
+CidaasAPI ->> ClientApp: Access Token
+deactivate CidaasAPI
+
+CidaasSDK ->> ClientApp: get tokens information
+
+activate CidaasSDK
+ClientApp ->> CidaasSDK: Tokens Information
+CidaasSDK ->> CidaasSDK: save tokens information in user storage
+deactivate CidaasSDK
+
+deactivate ClientApp
+
+
+User ->> ClientApp: interact with app
+
+activate ClientApp
+ClientApp ->> CidaasSDK: call SDK function
+
+activate CidaasSDK
+CidaasSDK ->> CidaasSDK: get tokens information from user storage
+CidaasSDK ->> CidaasAPI: call cidaas API
+deactivate CidaasSDK
+
+activate CidaasAPI
+CidaasAPI ->> ClientApp: return response
 deactivate CidaasAPI
 
 deactivate ClientApp
