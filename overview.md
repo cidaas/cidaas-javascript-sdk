@@ -15,7 +15,7 @@ sequenceDiagram
 User ->> ClientApp: login to app
 
 activate ClientApp
-ClientApp ->> CidaasSDK: call login function
+ClientApp ->> CidaasSDK: call loginWithBrowser()
 deactivate ClientApp
 
 activate CidaasSDK
@@ -25,7 +25,7 @@ deactivate CidaasSDK
 activate CidaasAPI
 CidaasAPI ->> User: redirect to login page
 User ->> CidaasAPI: do authentication
-CidaasAPI ->> ClientApp: redirect to main page
+CidaasAPI -->> ClientApp: redirect to main page, along with code
 deactivate CidaasAPI
 
 activate ClientApp
@@ -36,13 +36,13 @@ CidaasSDK ->> CidaasAPI: change code with tokens
 deactivate CidaasSDK
 
 activate CidaasAPI
-CidaasAPI ->> ClientApp: Access Token
+CidaasAPI -->> ClientApp: Access Token, Id Token, Refresh Token
 deactivate CidaasAPI
 
 CidaasSDK ->> ClientApp: get tokens information
 
 activate CidaasSDK
-ClientApp ->> CidaasSDK: Tokens Information
+ClientApp -->> CidaasSDK: Tokens Information
 CidaasSDK ->> CidaasSDK: save tokens information in user storage
 deactivate CidaasSDK
 
@@ -102,7 +102,7 @@ sequenceDiagram
 User ->> ClientApp: login to app
 
 activate ClientApp
-ClientApp ->> CidaasSDK: call login function
+ClientApp ->> CidaasSDK: call loginWithBrowser()
 deactivate ClientApp
 
 activate CidaasSDK
@@ -112,7 +112,7 @@ deactivate CidaasSDK
 activate CidaasAPI
 CidaasAPI ->> User: redirect to login page
 User ->> CidaasAPI: do authentication
-CidaasAPI ->> ClientApp: redirect to main page
+CidaasAPI -->> ClientApp: redirect to main page, along with code
 deactivate CidaasAPI
 
 activate ClientApp
@@ -123,13 +123,13 @@ CidaasSDK ->> CidaasAPI: change code with tokens
 deactivate CidaasSDK
 
 activate CidaasAPI
-CidaasAPI ->> ClientApp: Access Token
+CidaasAPI -->> ClientApp: Access Token, Id Token, Refresh Token
 deactivate CidaasAPI
 
 CidaasSDK ->> ClientApp: get tokens information
 
 activate CidaasSDK
-ClientApp ->> CidaasSDK: Tokens Information
+ClientApp -->> CidaasSDK: Tokens Information
 CidaasSDK ->> CidaasSDK: save tokens information in user storage
 deactivate CidaasSDK
 
