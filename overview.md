@@ -32,7 +32,7 @@ activate ClientApp
 ClientApp ->> CidaasSDK: call loginCallback()
 
 activate CidaasSDK
-CidaasSDK ->> CidaasAPI: change code with tokens
+CidaasSDK ->> CidaasAPI: generate tokens from code
 deactivate CidaasSDK
 
 activate CidaasAPI
@@ -106,20 +106,21 @@ ClientApp ->> CidaasSDK: call loginWithBrowser()
 deactivate ClientApp
 
 activate CidaasSDK
+CidaasSDK ->> CidaasSDK: generate code verifier & code challenge
 CidaasSDK ->> CidaasAPI: call cidaas API
 deactivate CidaasSDK
 
 activate CidaasAPI
 CidaasAPI ->> User: redirect to login page
 User ->> CidaasAPI: do authentication
-CidaasAPI -->> ClientApp: redirect to main page, along with code
+CidaasAPI -->> ClientApp: redirect to main page, along with authorization code
 deactivate CidaasAPI
 
 activate ClientApp
 ClientApp ->> CidaasSDK: call loginCallback()
 
 activate CidaasSDK
-CidaasSDK ->> CidaasAPI: change code with tokens
+CidaasSDK ->> CidaasAPI: exchange authorization code & code verifier with tokens
 deactivate CidaasSDK
 
 activate CidaasAPI
