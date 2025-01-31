@@ -21,6 +21,7 @@ Please check the [Changelog](https://github.com/Cidaas/cidaas-javascript-sdk/blo
 
 <!--ts-->
 * [Documentation](https://cidaas.github.io/cidaas-javascript-sdk)
+* [Overview](https://github.com/Cidaas/cidaas-javascript-sdk/blob/master/overview/overview.md)
 * [Installation](#installation)
 * [Initialisation](#initialisation)
 * [Usage](#usage)

@@ -5,7 +5,7 @@ Cidaas Javascript SDK helps integrating cidaas to your client application easily
 After adding Cidaas Javascript SDK Library to client side application and [configuring](configuration.md) it using oidc settings, it will be able to integrate cidaas functionalities such as:
 
 * authenticating user using [PKCE flow](pkce-flow.md)
-* [session management](session-management)
+* [session management](session-management.md)
 * user management
 * consent management
 * implementing multifactor authentication
