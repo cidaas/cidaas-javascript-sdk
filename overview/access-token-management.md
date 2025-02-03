@@ -5,7 +5,7 @@
 After successful authentication using SDK [PKCE Flow](pkce-flow), tokens information such as access token, id token as well as refresh token will be saved by the SDK in user storage by default.
 User Profile Information which are contained in id token will also be stored in the user storage
 
-By calling getUserInfoFromStorage(), this informations can be retrieved. Javascript SDK will set the token on each of Cidaas API request, when it is needed.
+By calling getUserInfoFromStorage(), this informations can be retrieved by [user manager](overview.md#config-user-provider). Javascript SDK will set the token on each of Cidaas API request, when it is needed.
 
 ```mermaid
 ---
