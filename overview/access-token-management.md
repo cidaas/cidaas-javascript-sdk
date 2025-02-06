@@ -28,7 +28,7 @@ CidaasSDK ->> CidaasAPI: call cidaas API
 deactivate CidaasSDK
 
 activate CidaasAPI
-CidaasAPI ->> ClientApp: return response
+CidaasAPI -->> ClientApp: response
 deactivate CidaasAPI
 
 deactivate ClientApp
