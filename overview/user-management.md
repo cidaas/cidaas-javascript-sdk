@@ -1,0 +1,212 @@
+# User Management
+
+Cidaas Javascript SDK User module provides functions which calls cidaas api for managing user as following:
+
+| SDK Function | Description |
+|----------------- | ----------------------- |
+|  getUserProfile | Get current active user information |
+|  updateProfile | Update a user profile in a user self service way |
+|  deleteUserAccount | Instead of deleting a user instanly, the sdk will call cidaas api for schedule deletion. |
+
+## User Creation Flow
+
+A new user can be created either when a user do self registration or being invited by another user. Cidaas Javascript SDK provides register function to create a new user, both as self registration or user invitation. To be able to use self registration, ensure [oidc settings](overview.md#configuration) to contains scope: `cidaas:register`.
+
+### Default Registration
+
+By calling registerWithBrowser(), user will be redirected to default cidaas registration page, where user can complete registration process.
+
+```mermaid
+---
+title: Default Self Registration
+---
+sequenceDiagram
+  Actor User
+  participant ClientApp as Client App
+  participant CidaasSDK as Cidaas Javascript SDK
+  participant CidaasAPI as Cidaas API
+
+User ->> ClientApp: click on registration button
+
+activate ClientApp
+ClientApp ->> CidaasSDK: call registerWithBrowser()
+deactivate ClientApp
+
+activate CidaasSDK
+CidaasSDK ->> CidaasSDK: get needed informations <br/>from configuration settings
+CidaasSDK ->> CidaasAPI: call cidaas API
+deactivate CidaasSDK
+
+activate CidaasAPI
+CidaasAPI ->> User: redirect to cidaas default register page
+deactivate CidaasAPI
+
+User ->> CidaasAPI: submit registration form
+activate CidaasAPI
+CidaasAPI ->> User: complete registration process
+deactivate CidaasAPI
+```
+
+### Custom Registration
+
+It is possibile to use Cidaas Javascript SDK to build custom registration page / flow by getting all configured registration fields beforehand.
+
+```mermaid
+---
+title: Build Custom Registration
+---
+sequenceDiagram
+  participant ClientApp as Client App
+  participant CidaasSDK as Cidaas Javascript SDK
+  participant CidaasAPI as Cidaas API
+
+ClientApp ->> CidaasSDK: call getRegistrationSetup()
+
+activate CidaasSDK
+CidaasSDK ->> CidaasAPI: call cidaas API
+deactivate CidaasSDK
+
+activate CidaasAPI
+CidaasAPI -->> ClientApp: configured registration fields
+deactivate CidaasAPI
+
+activate ClientApp
+ClientApp ->> ClientApp: build custom registration
+deactivate ClientApp
+```
+
+By calling register(), custom registration will be completed.
+
+```mermaid
+---
+title: Custom Self Registration
+---
+sequenceDiagram
+  Actor User
+  participant ClientApp as Client App
+  participant CidaasSDK as Cidaas Javascript SDK
+  participant CidaasAPI as Cidaas API
+
+User ->> ClientApp: click on registration button
+
+activate ClientApp
+ClientApp ->> ClientApp: do custom registration process
+ClientApp ->> CidaasSDK: call register()
+deactivate ClientApp
+
+activate CidaasSDK
+CidaasSDK ->> CidaasAPI: call cidaas API
+deactivate CidaasSDK
+
+activate CidaasAPI
+CidaasAPI ->> User: complete registration process
+deactivate CidaasAPI
+```
+
+### Invite Flow
+In case of [custom registration](#custom-registration), some information needed to be parsed from invite id after user is being redirected by invite link.  To be able to do cidaas invite flow, ensure [oidc settings](overview.md#configuration) to contains scope: `cidaas:invite`.
+
+```mermaid
+---
+title: Invite Flow
+---
+sequenceDiagram
+  Actor User
+  participant ClientApp as Client App
+  participant CidaasSDK as Cidaas Javascript SDK
+  participant CidaasAPI as Cidaas API
+
+User ->> CidaasAPI: click on invite link
+
+activate CidaasAPI
+CidaasAPI ->> ClientApp: redirect to custom registration page
+deactivate CidaasAPI
+
+activate ClientApp
+ClientApp ->> CidaasSDK: call getInviteUserDetails()
+deactivate ClientApp
+
+activate CidaasSDK
+CidaasSDK -->> ClientApp: invitation details
+deactivate CidaasSDK
+
+activate ClientApp
+ClientApp -->> ClientApp: prefill the registration form
+ClientApp ->> ClientApp: do custom registration process
+ClientApp ->> CidaasSDK: call register()
+deactivate ClientApp
+
+activate CidaasSDK
+CidaasSDK ->> CidaasAPI: call cidaas API
+deactivate CidaasSDK
+
+activate CidaasAPI
+CidaasAPI ->> User: complete registration process
+deactivate CidaasAPI
+```
+
+## Reset Password Flow
+
+Using Cidaas Javascript SDK makes it possible to build reset password functionality, which is provided by cidaas default hosted page, into client app if needed.
+
+By calling initiateResetPassword(), user will start reset password flow, in which cidaas api will generate rprq to be used in the next steps, as well as verifying the process e.g. via verification link & code which is sent by email. 
+
+By calling handleResetPassword(), the verification link, code as well as rprq will be process by cidaas api and after successful verification, the api will redirect browser to custom reset password page in client app, along with exchangeId, where user can change his password.
+
+By calling resetPassword(), the new password, exchangeId from handleResetPassword() as well as rprq from initiateResetPassword() will be checked by cidaas api. After successful check, the password reset flow will be finished and new password will be set.
+
+```mermaid
+---
+title: Reset Password Flow
+---
+sequenceDiagram
+  Actor User
+  participant ClientApp as Client App
+  participant CidaasSDK as Cidaas Javascript SDK
+  participant CidaasAPI as Cidaas API
+
+User ->> ClientApp: reset password
+
+activate ClientApp
+ClientApp ->> CidaasSDK: call initiateResetPassword()
+deactivate ClientApp
+
+activate CidaasSDK
+CidaasSDK ->> CidaasAPI: call cidaas API
+deactivate CidaasSDK
+
+activate CidaasAPI
+par rprq as api response
+    CidaasAPI -->> ClientApp: rprq (reset request id)
+and start user verification
+    CidaasAPI ->> User: verify user to chosen communication, e.g. sending verification link & code via email
+end
+deactivate CidaasAPI
+
+User ->> ClientApp: verify action
+
+activate ClientApp
+ClientApp ->> CidaasSDK: call handleResetpassword()
+deactivate ClientApp
+
+activate CidaasSDK
+CidaasSDK ->> CidaasAPI: call cidaas API
+deactivate CidaasSDK
+
+activate CidaasAPI
+CidaasAPI -->> ClientApp: exchangeId
+deactivate CidaasAPI
+
+activate ClientApp
+ClientApp ->> CidaasSDK: call resetPassword()
+deactivate ClientApp
+
+activate CidaasSDK
+CidaasSDK ->> CidaasAPI: call cidaas API
+deactivate CidaasSDK
+
+activate CidaasAPI
+CidaasAPI ->> User: Complete reset password
+deactivate CidaasAPI
+
+```
