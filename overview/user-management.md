@@ -127,8 +127,12 @@ ClientApp ->> CidaasSDK: call getInviteUserDetails()
 deactivate ClientApp
 
 activate CidaasSDK
-CidaasSDK -->> ClientApp: invitation details
+CidaasSDK ->> CidaasAPI: call cidaas API
 deactivate CidaasSDK
+
+activate CidaasAPI
+CidaasAPI -->> ClientApp: invitation details
+deactivate CidaasAPI
 
 activate ClientApp
 ClientApp ->> ClientApp: prefill the registration form
