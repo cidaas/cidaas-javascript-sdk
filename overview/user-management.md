@@ -131,7 +131,7 @@ CidaasSDK -->> ClientApp: invitation details
 deactivate CidaasSDK
 
 activate ClientApp
-ClientApp -->> ClientApp: prefill the registration form
+ClientApp ->> ClientApp: prefill the registration form
 ClientApp ->> ClientApp: do custom registration process
 ClientApp ->> CidaasSDK: call register()
 deactivate ClientApp
