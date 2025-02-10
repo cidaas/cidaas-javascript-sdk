@@ -7,7 +7,7 @@ After adding Cidaas Javascript SDK Library to client side application and [confi
 * authenticating user using [PKCE flow](pkce-flow.md)
 * [session management](session-management.md)
 * [user management](user-management.md)
-* consent management
+* [consent management](consent-management.md)
 * implementing multifactor authentication
 
 Aside from that, Cidaas Javascript SDK also provide useful functionalities such as:
