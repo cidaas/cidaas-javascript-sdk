@@ -10,7 +10,7 @@ Cidaas Javascript SDK User module provides functions which calls cidaas api for 
 
 ## User Creation Flow
 
-A new user can be created either when a user do self registration or being invited by another user. Cidaas Javascript SDK provides register function to create a new user, both as self registration or user invitation. To be able to use self registration, ensure [oidc settings](overview.md#configuration) to contains scope: `cidaas:register`.
+A new user can be created either when a user do self registration or being invited by another user. Cidaas Javascript SDK provides register function to create a new user, both as self registration or user invitation. To be able to use self registration, ensure [Oidc Settings](overview.md#oidc-settings) to contains scope: `cidaas:register`.
 
 ### Default Registration
 
@@ -104,7 +104,7 @@ deactivate CidaasAPI
 ```
 
 ### Invite Flow
-In case of [custom registration](#custom-registration), some information needed to be parsed from invite id after user is being redirected by invite link.  To be able to do cidaas invite flow, ensure [oidc settings](overview.md#configuration) to contains scope: `cidaas:invite`.
+In case of [custom registration](#custom-registration), some information needed to be parsed from invite id after user is being redirected by invite link. To be able to do cidaas invite flow, ensure [Oidc Settings](overview.md#oidc-settings) to contains scope: `cidaas:invite`.
 
 ```mermaid
 ---

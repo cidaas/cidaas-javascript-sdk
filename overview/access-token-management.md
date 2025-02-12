@@ -5,7 +5,7 @@
 After successful authentication using SDK [PKCE Flow](pkce-flow.md), tokens information such as access token, id token as well as refresh token will be saved by the SDK in user storage by default.
 User Profile Information which are contained in id token will also be stored in the user storage
 
-By calling getUserInfoFromStorage(), this informations can be retrieved by [user manager](overview.md#config-user-provider). Javascript SDK will set the token on each of Cidaas API request, when it is needed.
+By calling getUserInfoFromStorage(), this informations can be retrieved by [user manager](overview.md#user-manager). Javascript SDK will set the token on each of Cidaas API request, when it is needed.
 
 ```mermaid
 ---
@@ -64,4 +64,4 @@ Cidaas Javascript SDK provides offline access token check, which verify the foll
 * whether the SDK knows the issuer of token 
 * whether the SDK knows the scopes in the token
 
-The SDK will use [Oidc Settings](overview.md#configuration) to check whether the information contain in the token is valid.
+The SDK will use [Oidc Settings](overview.md#oidc-settings) to check whether the information contain in the token is valid.
