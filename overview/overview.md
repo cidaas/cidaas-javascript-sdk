@@ -8,7 +8,7 @@ After adding Cidaas Javascript SDK Library to client side application and [confi
 * [session management](session-management.md)
 * [user management](user-management.md)
 * [consent management](consent-management.md)
-* implementing multifactor authentication
+* implementing [multifactor authentication](multifactor-authentication.md)
 
 Aside from that, Cidaas Javascript SDK also provide useful functionalities such as:
 
