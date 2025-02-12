@@ -56,3 +56,12 @@ activate CidaasSDK
 CidaasSDK ->> CidaasSDK: update user storage with new token information
 deactivate CidaasSDK
 ```
+
+## Offline Access Token Check
+
+Cidaas Javascript SDK provides offline access token check, which verify the following information of the token:
+* whether the token has been expired
+* whether the SDK knows the issuer of token 
+* whether the SDK knows the scopes in the token
+
+The SDK will use [Oidc Settings](overview.md#configuration) to check whether the information contain in the token is valid.

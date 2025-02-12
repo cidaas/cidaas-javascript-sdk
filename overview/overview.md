@@ -14,8 +14,8 @@ Aside from that, Cidaas Javascript SDK also provide useful functionalities such 
 
 * [access token management](access-token-management.md): storing, retrieving & renewal of tokens
 * [automatically assign access token](access-token-management.md#storing--getting-access-token-information) to api calls which needs it
+* [offline access token check](access-token-management.md#offline-access-token-check)
 * providing data model for each of cidaas api calls
-* offline access token check
 
 ## Configuration
 
