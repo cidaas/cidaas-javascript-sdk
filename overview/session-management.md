@@ -22,6 +22,7 @@ User ->> ClientApp: click on logout button
 
 activate ClientApp
 ClientApp ->> CidaasSDK: call logout()
+deactivate ClientApp
 
 activate CidaasSDK
 CidaasSDK ->> CidaasSDK: get needed informations to end session
@@ -29,8 +30,8 @@ CidaasSDK ->> CidaasAPI: call endsession api
 deactivate CidaasSDK
 
 activate CidaasAPI
-CidaasAPI ->> ClientApp: redirect to post logout uri
+CidaasAPI ->> User: redirect to post logout uri
 deactivate CidaasAPI
 
-deactivate ClientApp
+
 ```
