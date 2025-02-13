@@ -35,21 +35,20 @@ deactivate CidaasAPI
 
 activate ClientApp
 ClientApp ->> CidaasSDK: call loginCallback()
+deactivate ClientApp
 
 activate CidaasSDK
 CidaasSDK ->> CidaasAPI: exchange authorization code & code verifier with tokens
 deactivate CidaasSDK
 
 activate CidaasAPI
-CidaasAPI -->> ClientApp: Access Token, Id Token, Refresh Token
+CidaasAPI -->> CidaasSDK: Access Token, Id Token, Refresh Token
 deactivate CidaasAPI
 
-CidaasSDK ->> ClientApp: get tokens information
-
 activate CidaasSDK
-ClientApp -->> CidaasSDK: Tokens Information
-CidaasSDK ->> CidaasSDK: save tokens information in user storage
+CidaasSDK ->> CidaasSDK: save informations in user storage
 deactivate CidaasSDK
 
-deactivate ClientApp
+CidaasSDK -->> ClientApp: user informations
+
 ```

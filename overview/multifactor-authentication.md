@@ -4,7 +4,7 @@ Cidaas Javascript SDK provides functions which calls cidaas api for managing mul
 
 | SDK Function | Description |
 |----------------- | ----------------------- |
-|  getMFAList | Get configured mfa of current active user |
+|  getMFAList | Get all mfa, which has been configured by current active user |
 |  getAllVerificationList | Get all mfa possibilities for the client app |
 
 ## MFA Verification
@@ -32,7 +32,7 @@ CidaasSDK ->> CidaasAPI: call cidaas API
 deactivate CidaasSDK
 
 activate CidaasAPI
-CidaasAPI ->> User: start authenticating process
+CidaasAPI ->> User: start MFA verification process
 deactivate CidaasAPI
 
 
@@ -69,7 +69,7 @@ end
 
 ## Enroll new Authentication Method
 
-To enroll a new MFA method, you can call initiateEnrollment() function. This will generate exchange id which will be used alongside one time verification using enrollVerification() to complete enrollment process.
+To enroll a new MFA method, you can call initiateEnrollment() function. This will generate exchange id, which will be used by enrollVerification() to complete enrollment process.
 
 ```mermaid
 ---
@@ -109,4 +109,4 @@ deactivate CidaasAPI
 ```
 
 By using getEnrollmentStatus(), the status of enrollment process can be tracked.
-By using checkVerificationTypeConfigured(), you can check whether a MFA method has been enrolled.
+By using checkVerificationTypeConfigured(), you can check whether a specific MFA method has been enrolled.

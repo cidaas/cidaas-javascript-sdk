@@ -1,6 +1,6 @@
 # Consent Management
 
-It is possibile to use Cidaas Javascript SDK to build custom accept consent page / flow by getting all consent details beforehand.
+By using getConsentDetails() as well as getConsentVersionDetails(), it is possibile to get all consent details and build custom consent page / flow based on the details.
 
 ```mermaid
 ---
@@ -39,7 +39,15 @@ ClientApp ->> ClientApp: build custom consent page
 deactivate ClientApp
 ```
 
-Cidaas provides 3 types of consents: app level consent, scope consent & claim consent. To accept these different consents, acceptConsent(), acceptScopeConsent(), acceptClaimConsent()  should be called afterwards.
+Cidaas provides 3 types of consents: 
+* app level consent
+* scope consent
+* claim consent
+
+To accept these different consents, the following functions should be called:
+* acceptConsent()
+* acceptScopeConsent()
+* acceptClaimConsent()
 
 ```mermaid
 ---

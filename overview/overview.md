@@ -38,10 +38,11 @@ flowchart TB
 Cidaas Javascript SDK Config User Provider contains [Oidc Settings](#oidc-settings) as well as [User Manager](#user-manager). It will be used to [instantiate various modules](#configuration).
 
 ### Oidc Settings
-Oidc settings will be used to configured [User Manager](#user-manager). The full list of oidc settings configuration can be found on [documentation site](https://cidaas.github.io/cidaas-javascript-sdk/interfaces/OidcSettings.html) site, with some notable properties:
-* authority: cidaas instance, which will run the authentication & authorization process
+Oidc settings will be used to configured [User Manager](#user-manager). The full list of oidc settings configuration can be found on [documentation site](https://cidaas.github.io/cidaas-javascript-sdk/interfaces/OidcSettings.html), with some notable properties:
+* authority: cidaas instance url, which will run the authentication & authorization process
 * client_id: generated id from cidaas, which will be used to identify client app
 * redirect_uri: redirection url after succesful authentication
+* post_logout_redirect_uri: redirection url after succesful logout
 * scope: list of scope, used to specify access privileges. Some examples of it includes:
   * To get refresh token, scope: `offline_access` needs to be provided
   * To be able to do registration, scope: `cidaas:register` needs to be provided

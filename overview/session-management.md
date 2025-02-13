@@ -6,7 +6,7 @@ Shortly before access token expired, Cidaas Javascript SDK will [automatically g
 
 ## Ending Session
 
-By calling logout(), the sdk will call Cidaas endsession endpoint and providing needed parameters such as client id, id token hint as well as post logout url from configs & user storage to the endpoint.
+By calling logout(), the sdk will call Cidaas endsession endpoint and providing needed parameters such as client id, id token hint as well as post logout url from [Oidc Settings](overview.md#oidc-settings) & user storage to the endpoint.
 
 ```mermaid
 ---

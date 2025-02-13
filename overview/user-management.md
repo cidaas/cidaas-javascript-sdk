@@ -5,7 +5,7 @@ Cidaas Javascript SDK User module provides functions which calls cidaas api for 
 | SDK Function | Description |
 |----------------- | ----------------------- |
 |  getUserProfile | Get current active user information |
-|  updateProfile | Update a user profile in a user self service way |
+|  updateProfile | Update user profile in a user self service way |
 |  deleteUserAccount | Instead of deleting a user instanly, the sdk will call cidaas api for schedule deletion. |
 
 ## User Creation Flow
@@ -14,7 +14,7 @@ A new user can be created either when a user do self registration or being invit
 
 ### Default Registration
 
-By calling registerWithBrowser(), user will be redirected to default cidaas registration page, where user can complete registration process.
+By calling registerWithBrowser(), user will be redirected to configured registration url, where user can complete registration process. By default client app will be redirected to cidaas registration page. 
 
 ```mermaid
 ---
@@ -210,7 +210,7 @@ CidaasSDK ->> CidaasAPI: call cidaas API
 deactivate CidaasSDK
 
 activate CidaasAPI
-CidaasAPI ->> User: Complete reset password
+CidaasAPI ->> User: complete reset password
 deactivate CidaasAPI
 
 ```
