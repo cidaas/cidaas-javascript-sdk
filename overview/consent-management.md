@@ -63,9 +63,7 @@ sequenceDiagram
   participant CidaasSDK as Cidaas Javascript SDK
   participant CidaasAPI as Cidaas API
 User ->> ClientApp: click on accept button
-activate ClientApp
-ClientApp ->> ClientApp: do custom consent process
-deactivate ClientApp
+
 alt App Level Consent
     ClientApp ->> CidaasSDK: call acceptConsent()
     activate CidaasSDK

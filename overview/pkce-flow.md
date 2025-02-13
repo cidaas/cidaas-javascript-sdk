@@ -47,8 +47,7 @@ deactivate CidaasAPI
 
 activate CidaasSDK
 CidaasSDK ->> CidaasSDK: save informations in user storage
-deactivate CidaasSDK
-
 CidaasSDK -->> ClientApp: user informations
+deactivate CidaasSDK
 
 ```

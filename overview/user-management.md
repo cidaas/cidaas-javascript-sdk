@@ -87,10 +87,9 @@ sequenceDiagram
   participant CidaasSDK as Cidaas Javascript SDK
   participant CidaasAPI as Cidaas API
 
-User ->> ClientApp: click on registration button
+User ->> ClientApp: do custom registration process
 
 activate ClientApp
-ClientApp ->> ClientApp: do custom registration process
 ClientApp ->> CidaasSDK: call register()
 deactivate ClientApp
 
@@ -136,7 +135,10 @@ deactivate CidaasAPI
 
 activate ClientApp
 ClientApp ->> ClientApp: prefill the registration form
-ClientApp ->> ClientApp: do custom registration process
+deactivate ClientApp
+
+User ->> ClientApp: do custom registration process
+activate ClientApp
 ClientApp ->> CidaasSDK: call register()
 deactivate ClientApp
 
