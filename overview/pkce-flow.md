@@ -4,7 +4,7 @@ By calling loginWithBrowser() function, the sdk will call cidaas authz url, whic
 
 After successful user authentication in the login page, user will be be redirected to predefined redirecturl, which has been configured in configuration file, alongside with code to be exchanged as tokens. 
 
-By calling loginCallback() from the redirect url afterwards, the SDK will exchange the code from cidaas into tokens. This includes Access Token, Id Token & Refresh Token. The SDK will saved the tokens afterwards as default behaviour. This can be disabled.
+By calling loginCallback() from the redirect url afterwards, the SDK will exchange the code from cidaas into tokens. This includes Access Token, Id Token & Refresh Token. The SDK will save the tokens afterwards as default behaviour. This can be disabled.
 
 ```mermaid
 ---

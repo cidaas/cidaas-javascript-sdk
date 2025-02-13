@@ -48,7 +48,7 @@ alt Cancel MFA Process
     deactivate CidaasSDK
 
     activate CidaasAPI
-    CidaasAPI ->> User: Cancel MFA Process
+    CidaasAPI ->> ClientApp: Cancel MFA Process
     deactivate CidaasAPI
 else Complete MFA Process
     User ->> ClientApp: authenticate MFA
@@ -62,7 +62,7 @@ else Complete MFA Process
     deactivate CidaasSDK
 
     activate CidaasAPI
-    CidaasAPI ->> User: Complete MFA Process
+    CidaasAPI ->> ClientApp: Complete MFA Process
     deactivate CidaasAPI
 end
 ```
@@ -104,7 +104,7 @@ CidaasSDK ->> CidaasAPI: call cidaas API
 deactivate CidaasSDK
 
 activate CidaasAPI
-CidaasAPI ->> User: complete MFA enrollment process
+CidaasAPI ->> ClientApp: complete MFA enrollment process
 deactivate CidaasAPI
 ```
 

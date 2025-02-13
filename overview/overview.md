@@ -44,9 +44,12 @@ Oidc settings will be used to configured [User Manager](#user-manager). The full
 * redirect_uri: redirection url after succesful authentication
 * post_logout_redirect_uri: redirection url after succesful logout
 * scope: list of scope, used to specify access privileges. Some examples of it includes:
-  * To get refresh token, scope: `offline_access` needs to be provided
-  * To be able to do registration, scope: `cidaas:register` needs to be provided
-  * To be able to do cidaas invite flow, scope: `cidaas:invite` needs to be provided
+  * `offline_access` to get refresh token
+  * `cidaas:register` to be able to do registration
+  * `cidaas:invite` to be able to do cidaas invite flow
 
 ### User Manager
-User manager, which is created based on oidc settings, is responsible for user sign in using [PKCE flow](pkce-flow.md), [session management](session-management.md) as well as [managing user informations](access-token-management.md#storing--getting-access-token-information) such as access token, id token & refresh token.
+User manager, which is created based on oidc settings, is responsible for the following: 
+* user sign in using [PKCE flow](pkce-flow.md)
+* [session management](session-management.md)
+* [managing user informations](access-token-management.md#storing--getting-access-token-information) such as access token, id token & refresh token.

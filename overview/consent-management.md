@@ -1,5 +1,8 @@
 # Consent Management
 
+Cidaas supports consent flow in form of default consent hosted pages. In case of having custom flow or wanting custom page, Cidaas Javascript SDK provides functions to call cidaas api, which can be used to create custom consent page / flow in the client app.
+
+## Building Custom Consent
 By using getConsentDetails() as well as getConsentVersionDetails(), it is possibile to get all consent details and build custom consent page / flow based on the details.
 
 ```mermaid
@@ -38,6 +41,7 @@ activate ClientApp
 ClientApp ->> ClientApp: build custom consent page
 deactivate ClientApp
 ```
+## Accepting Custom Consent
 
 Cidaas provides 3 types of consents: 
 * app level consent

@@ -20,13 +20,21 @@ Please check the [Changelog](https://github.com/Cidaas/cidaas-javascript-sdk/blo
 ## Table of Contents
 
 <!--ts-->
-* [Documentation](https://cidaas.github.io/cidaas-javascript-sdk)
 * [Overview](https://github.com/Cidaas/cidaas-javascript-sdk/blob/master/overview/overview.md)
+* [Documentation](https://cidaas.github.io/cidaas-javascript-sdk)
 * [Installation](#installation)
 * [Initialisation](#initialisation)
 * [Usage](#usage)
 * [Functions Overview](#functions-overview)
 * [Possible Error](#possible-error)
+
+### Overview
+
+[Here](https://github.com/Cidaas/cidaas-javascript-sdk/blob/master/overview/overview.md) you can find general overview of Cidaas Javascript SDK
+
+### Documentation
+
+[Here](https://cidaas.github.io/cidaas-javascript-sdk) you can find tehcnical documentation of Cidaas Javascript SDK
 
 ### Installation
 

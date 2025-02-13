@@ -5,12 +5,12 @@ Cidaas Javascript SDK User module provides functions which calls cidaas api for 
 | SDK Function | Description |
 |----------------- | ----------------------- |
 |  getUserProfile | Get current active user information |
-|  updateProfile | Update user profile in a user self service way |
+|  updateProfile | Update user information in a self service way |
 |  deleteUserAccount | Instead of deleting a user instanly, the sdk will call cidaas api for schedule deletion. |
 
 ## User Creation Flow
 
-A new user can be created either when a user do self registration or being invited by another user. Cidaas Javascript SDK provides register function to create a new user, both as self registration or user invitation. To be able to use self registration, ensure [Oidc Settings](overview.md#oidc-settings) to contains scope: `cidaas:register`.
+A new user can be created either when a user do self registration or being invited by another user. Cidaas Javascript SDK provides register function to create a new user, both as self registration and from user invitation. To be able to use self registration, ensure [Oidc Settings](overview.md#oidc-settings) to contains scope: `cidaas:register`.
 
 ### Default Registration
 
@@ -43,7 +43,7 @@ deactivate CidaasAPI
 
 User ->> CidaasAPI: submit registration form
 activate CidaasAPI
-CidaasAPI ->> User: complete registration process
+CidaasAPI ->> ClientApp: complete registration process
 deactivate CidaasAPI
 ```
 
@@ -99,12 +99,12 @@ CidaasSDK ->> CidaasAPI: call cidaas API
 deactivate CidaasSDK
 
 activate CidaasAPI
-CidaasAPI ->> User: complete registration process
+CidaasAPI ->> ClientApp: complete registration process
 deactivate CidaasAPI
 ```
 
 ### Invite Flow
-In case of [custom registration](#custom-registration), some information needed to be parsed from invite id after user is being redirected by invite link. To be able to do cidaas invite flow, ensure [Oidc Settings](overview.md#oidc-settings) to contains scope: `cidaas:invite`.
+In case of [custom registration](#custom-registration), some informations need to be parsed from invite id, after user is being redirected by invite link. To be able to do cidaas invite flow, ensure [Oidc Settings](overview.md#oidc-settings) to contains scope: `cidaas:invite`.
 
 ```mermaid
 ---
@@ -145,7 +145,7 @@ CidaasSDK ->> CidaasAPI: call cidaas API
 deactivate CidaasSDK
 
 activate CidaasAPI
-CidaasAPI ->> User: complete registration process
+CidaasAPI ->> ClientApp: complete registration process
 deactivate CidaasAPI
 ```
 
@@ -210,7 +210,7 @@ CidaasSDK ->> CidaasAPI: call cidaas API
 deactivate CidaasSDK
 
 activate CidaasAPI
-CidaasAPI ->> User: complete reset password
+CidaasAPI ->> ClientApp: complete reset password
 deactivate CidaasAPI
 
 ```
@@ -253,7 +253,7 @@ CidaasSDK ->> CidaasAPI: call cidaas API
 deactivate CidaasSDK
 
 activate CidaasAPI
-CidaasAPI ->> User: Complete link account
+CidaasAPI ->> ClientApp: Complete link account
 deactivate CidaasAPI
 
 ```
