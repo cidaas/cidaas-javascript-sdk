@@ -12,9 +12,9 @@ title: Integration PKCE Flow
 ---
 sequenceDiagram
   Actor User
-  participant ClientApp as Client App
-  participant CidaasSDK as Cidaas Javascript SDK
-  participant CidaasAPI as Cidaas API
+  participant ClientApp as client app
+  participant CidaasSDK as cidaas javascript SDK
+  participant CidaasAPI as cidaas API
 
 User ->> ClientApp: login to app
 

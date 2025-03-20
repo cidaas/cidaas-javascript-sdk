@@ -1,6 +1,6 @@
 # Multifactor Authentication
 
-Cidaas Javascript SDK provides functions which calls cidaas api for managing multifactor authentication as following:
+Cidaas javascript SDK provides functions which calls cidaas api for managing multifactor authentication as following:
 
 | SDK Function | Description |
 |----------------- | ----------------------- |
@@ -17,9 +17,9 @@ title: MFA Verification
 ---
 sequenceDiagram
   Actor User 
-  participant ClientApp as Client App
-  participant CidaasSDK as Cidaas Javascript SDK
-  participant CidaasAPI as Cidaas API
+  participant ClientApp as client app
+  participant CidaasSDK as cidaas javascript SDK
+  participant CidaasAPI as cidaas API
 
 User ->> ClientApp: login
 
@@ -77,9 +77,9 @@ title: Enroll new Authentication
 ---
 sequenceDiagram
   Actor User
-  participant ClientApp as Client App
-  participant CidaasSDK as Cidaas Javascript SDK
-  participant CidaasAPI as Cidaas API
+  participant ClientApp as client app
+  participant CidaasSDK as cidaas javascript SDK
+  participant CidaasAPI as cidaas API
 
 User ->> ClientApp: add new MFA Method
 

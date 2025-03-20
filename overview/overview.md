@@ -1,8 +1,8 @@
 # Overview
 
-Cidaas Javascript SDK helps integrating cidaas to your client application easily. It manages tokens and communicate with cidaas apis.
+Cidaas javascript SDK helps integrating cidaas to your client application easily. It manages tokens and communicate with cidaas apis.
 
-After adding Cidaas Javascript SDK Library to client side application and [configuring](#configuration) it using [Oidc Settings](#oidc-settings), it will be able to integrate cidaas functionalities such as:
+After adding cidaas javascript SDK Library to client side application and [configuring](#configuration) it using [Oidc Settings](#oidc-settings), it will be able to integrate cidaas functionalities such as:
 
 * authenticating user using [PKCE flow](pkce-flow.md)
 * [session management](session-management.md)
@@ -10,7 +10,7 @@ After adding Cidaas Javascript SDK Library to client side application and [confi
 * [consent management](consent-management.md)
 * implementing [multifactor authentication](multifactor-authentication.md)
 
-Aside from that, Cidaas Javascript SDK also provide useful functionalities such as:
+Aside from that, cidaas javascript SDK also provide useful functionalities such as:
 
 * [access token management](access-token-management.md): storing, retrieving & renewal of tokens
 * [automatically assign access token](access-token-management.md#storing--getting-access-token-information) to api calls which needs it
@@ -19,7 +19,7 @@ Aside from that, Cidaas Javascript SDK also provide useful functionalities such 
 
 ## Configuration
 
-To configure Cidaas Javascript SDK, you will need to provide [Oidc Settings](#oidc-settings). Oidc settings is part of [Config User Provider](#config-user-provider) and it will be used to instantiate various modules, to communicate with cidaas api.
+To configure cidaas javascript SDK, you will need to provide [Oidc Settings](#oidc-settings). Oidc settings is part of [Config User Provider](#config-user-provider) and it will be used to instantiate various modules, to communicate with cidaas api.
 
 ```mermaid
 flowchart TB
@@ -35,7 +35,7 @@ flowchart TB
 
 ## Config User Provider
 
-Cidaas Javascript SDK Config User Provider contains [Oidc Settings](#oidc-settings) as well as [User Manager](#user-manager). It will be used to [instantiate various modules](#configuration).
+Cidaas javascript SDK Config User Provider contains [Oidc Settings](#oidc-settings) as well as [User Manager](#user-manager). It will be used to [instantiate various modules](#configuration).
 
 ### Oidc Settings
 Oidc settings will be used to configured [User Manager](#user-manager). The full list of oidc settings configuration can be found on [documentation site](https://cidaas.github.io/cidaas-javascript-sdk/interfaces/OidcSettings.html), with some notable properties:

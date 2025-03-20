@@ -13,7 +13,7 @@
 
 # Cidaas Javascript SDK
 
-This cidaas Javascript SDK library is built on the top of [OIDC client typescript library](https://github.com/authts/oidc-client-ts). 
+This cidaas javascript SDK library is built on the top of [OIDC client typescript library](https://github.com/authts/oidc-client-ts). 
 
 Please check the [Changelog](https://github.com/Cidaas/cidaas-javascript-sdk/blob/master/CHANGELOG.md) for more information about the latest release.
 
@@ -30,11 +30,11 @@ Please check the [Changelog](https://github.com/Cidaas/cidaas-javascript-sdk/blo
 
 ### Overview
 
-[Here](https://github.com/Cidaas/cidaas-javascript-sdk/blob/master/overview/overview.md) you can find general overview of Cidaas Javascript SDK
+[Here](https://github.com/Cidaas/cidaas-javascript-sdk/blob/master/overview/overview.md) you can find general overview of cidaas javascript SDK
 
 ### Documentation
 
-[Here](https://cidaas.github.io/cidaas-javascript-sdk) you can find tehcnical documentation of Cidaas Javascript SDK
+[Here](https://cidaas.github.io/cidaas-javascript-sdk) you can find technical documentation of cidaas javascript SDK
 
 ### Installation
 
@@ -218,7 +218,7 @@ cidaasAuthenticationService.getUserInfoFromStorage().then(function(response) {
 
 ### Functions Overview
 
-Cidaas Javascript SDK Functions can be found on the [documentation](https://cidaas.github.io/cidaas-javascript-sdk).
+Cidaas javascript SDK functions can be found on the [documentation](https://cidaas.github.io/cidaas-javascript-sdk).
 
 ## Possible Error
 

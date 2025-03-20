@@ -1,6 +1,6 @@
 # User Management
 
-Cidaas Javascript SDK User module provides functions which calls cidaas api for managing user as following:
+Cidaas javascript SDK User module provides functions which calls cidaas api for managing user as following:
 
 | SDK Function | Description |
 |----------------- | ----------------------- |
@@ -10,7 +10,7 @@ Cidaas Javascript SDK User module provides functions which calls cidaas api for 
 
 ## User Creation Flow
 
-A new user can be created either when a user do self registration or being invited by another user. Cidaas Javascript SDK provides register function to create a new user, both as self registration and from user invitation. To be able to use self registration, ensure [Oidc Settings](overview.md#oidc-settings) to contains scope: `cidaas:register`.
+A new user can be created either when a user do self registration or being invited by another user. Cidaas javascript SDK provides register function to create a new user, both as self registration and from user invitation. To be able to use self registration, ensure [Oidc Settings](overview.md#oidc-settings) to contains scope: `cidaas:register`.
 
 ### Default Registration
 
@@ -22,9 +22,9 @@ title: Default Self Registration
 ---
 sequenceDiagram
   Actor User
-  participant ClientApp as Client App
-  participant CidaasSDK as Cidaas Javascript SDK
-  participant CidaasAPI as Cidaas API
+  participant ClientApp as client app
+  participant CidaasSDK as cidaas javascript SDK
+  participant CidaasAPI as cidaas API
 
 User ->> ClientApp: click on registration button
 
@@ -49,16 +49,16 @@ deactivate CidaasAPI
 
 ### Custom Registration
 
-It is possibile to use Cidaas Javascript SDK to build custom registration page / flow by getting all configured registration fields beforehand.
+It is possibile to use cidaas javascript SDK to build custom registration page / flow by getting all configured registration fields beforehand.
 
 ```mermaid
 ---
 title: Build Custom Registration
 ---
 sequenceDiagram
-  participant ClientApp as Client App
-  participant CidaasSDK as Cidaas Javascript SDK
-  participant CidaasAPI as Cidaas API
+  participant ClientApp as client app
+  participant CidaasSDK as cidaas javascript SDK
+  participant CidaasAPI as cidaas API
 
 ClientApp ->> CidaasSDK: call getRegistrationSetup()
 
@@ -83,9 +83,9 @@ title: Custom Self Registration
 ---
 sequenceDiagram
   Actor User
-  participant ClientApp as Client App
-  participant CidaasSDK as Cidaas Javascript SDK
-  participant CidaasAPI as Cidaas API
+  participant ClientApp as client app
+  participant CidaasSDK as cidaas javascript SDK
+  participant CidaasAPI as cidaas API
 
 User ->> ClientApp: do custom registration process
 
@@ -111,9 +111,9 @@ title: Invite Flow
 ---
 sequenceDiagram
   Actor User
-  participant ClientApp as Client App
-  participant CidaasSDK as Cidaas Javascript SDK
-  participant CidaasAPI as Cidaas API
+  participant ClientApp as client app
+  participant CidaasSDK as cidaas javascript SDK
+  participant CidaasAPI as cidaas API
 
 User ->> CidaasAPI: click on invite link
 
@@ -153,7 +153,7 @@ deactivate CidaasAPI
 
 ## Reset Password Flow
 
-Using Cidaas Javascript SDK makes it possible to build reset password functionality, which is provided by cidaas default hosted page, into client app if needed.
+Using cidaas javascript SDK makes it possible to build reset password functionality, which is provided by cidaas default hosted page, into client app if needed.
 
 By calling initiateResetPassword(), user will start reset password flow, in which cidaas api will generate rprq to be used in the next steps, as well as verifying the process e.g. via verification link & code which is sent by email. 
 
@@ -167,9 +167,9 @@ title: Reset Password Flow
 ---
 sequenceDiagram
   Actor User
-  participant ClientApp as Client App
-  participant CidaasSDK as Cidaas Javascript SDK
-  participant CidaasAPI as Cidaas API
+  participant ClientApp as client app
+  participant CidaasSDK as cidaas javascript SDK
+  participant CidaasAPI as cidaas API
 
 User ->> ClientApp: reset password
 
@@ -228,9 +228,9 @@ title: Account Linking Flow
 ---
 sequenceDiagram
   Actor User
-  participant ClientApp as Client App
-  participant CidaasSDK as Cidaas Javascript SDK
-  participant CidaasAPI as Cidaas API
+  participant ClientApp as client app
+  participant CidaasSDK as cidaas javascript SDK
+  participant CidaasAPI as cidaas API
 
 User ->> ClientApp: link account
 
@@ -260,5 +260,5 @@ deactivate CidaasAPI
 
 ```
 
-Cidaas Javascript SDK also provide getLinkedUsers() function, which will return all linked users of current active user.
+Cidaas javascript SDK also provide getLinkedUsers() function, which will return all linked users of current active user.
 To unlink users, unlinkAccount() can be used.

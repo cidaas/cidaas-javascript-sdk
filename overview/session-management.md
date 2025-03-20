@@ -2,7 +2,7 @@
 
 ## Extending Session
 
-Shortly before access token expired, Cidaas Javascript SDK will [automatically get a new token](access-token-management.md#refresh-token-flow), if refresh token is configured. To get refresh token, scope: `offline_access` needs to be provided in [Oidc Settings](overview.md#oidc-settings). 
+Shortly before access token expired, cidaas javascript SDK will [automatically get a new token](access-token-management.md#refresh-token-flow), if refresh token is configured. To get refresh token, scope: `offline_access` needs to be provided in [Oidc Settings](overview.md#oidc-settings). 
 
 ## Ending Session
 
@@ -14,9 +14,9 @@ title: Ending Session
 ---
 sequenceDiagram
   Actor User
-  participant ClientApp as Client App
-  participant CidaasSDK as Cidaas Javascript SDK
-  participant CidaasAPI as Cidaas API
+  participant ClientApp as client app
+  participant CidaasSDK as cidaas javascript SDK
+  participant CidaasAPI as cidaas API
 
 User ->> ClientApp: click on logout button
 

@@ -13,9 +13,9 @@ title: Cidaas API Call & Token usage
 ---
 sequenceDiagram
   Actor User
-  participant ClientApp as Client App
-  participant CidaasSDK as Cidaas Javascript SDK
-  participant CidaasAPI as Cidaas API
+  participant ClientApp as client app
+  participant CidaasSDK as cidaas javascript SDK
+  participant CidaasAPI as cidaas API
 
 User ->> ClientApp: interact with app
 
@@ -36,7 +36,7 @@ deactivate ClientApp
 
 ## Refresh Token Flow
 
-Cidaas Javascript SDK will renew the token stored in the user storage, one minute before the token expired, by default. This behaviour can be disabled in case it is not wished.
+Cidaas javascript SDK will renew the token stored in the user storage, one minute before the token expired, by default. This behaviour can be disabled in case it is not wished.
 
 By calling renewToken(), the token will be refreshed manually regardless of remaining time.
 
@@ -45,8 +45,8 @@ By calling renewToken(), the token will be refreshed manually regardless of rema
 title: Refresh Token Flow
 ---
 sequenceDiagram
-  participant CidaasSDK as Cidaas Javascript SDK
-  participant CidaasAPI as Cidaas API
+  participant CidaasSDK as cidaas javascript SDK
+  participant CidaasAPI as cidaas API
 
 CidaasSDK ->> CidaasAPI: request new tokens using refresh token
 activate CidaasAPI
@@ -59,7 +59,7 @@ deactivate CidaasSDK
 
 ## Offline Access Token Check
 
-Cidaas Javascript SDK provides offline access token check, which verify the following information of the token:
+Cidaas javascript SDK provides offline access token check, which verify the following information of the token:
 * whether the token has been expired
 * whether the SDK knows the issuer of token 
 * whether the SDK knows the scopes in the token
