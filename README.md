@@ -13,19 +13,28 @@
 
 # Cidaas Javascript SDK
 
-This cidaas Javascript SDK library is built on the top of [OIDC client typescript library](https://github.com/authts/oidc-client-ts). 
+This cidaas javascript SDK library is built on the top of [OIDC client typescript library](https://github.com/authts/oidc-client-ts). 
 
 Please check the [Changelog](https://github.com/Cidaas/cidaas-javascript-sdk/blob/master/CHANGELOG.md) for more information about the latest release.
 
 ## Table of Contents
 
 <!--ts-->
+* [Overview](https://github.com/Cidaas/cidaas-javascript-sdk/blob/master/overview/overview.md)
 * [Documentation](https://cidaas.github.io/cidaas-javascript-sdk)
 * [Installation](#installation)
 * [Initialisation](#initialisation)
 * [Usage](#usage)
 * [Functions Overview](#functions-overview)
 * [Possible Error](#possible-error)
+
+### Overview
+
+[Here](https://github.com/Cidaas/cidaas-javascript-sdk/blob/master/overview/overview.md) you can find general overview of cidaas javascript SDK
+
+### Documentation
+
+[Here](https://cidaas.github.io/cidaas-javascript-sdk) you can find technical documentation of cidaas javascript SDK
 
 ### Installation
 
@@ -44,9 +53,9 @@ npm install cidaas-javascript-sdk
 
 ### Initialisation
 
-After adding the sdk library, create a local file such as **cidaas.service.ts** and define Cidaas options variable there for initializing cidaas sdk.
+After adding the sdk library, create a local file such as **cidaas.service.ts** and define Oidc settings variable there for initializing cidaas sdk.
 
-Cidaas options variable support every [OIDC Client UserManagerSettings Properties](https://authts.github.io/oidc-client-ts/interfaces/UserManagerSettings.html) which has the following notable properties:
+Oidc settings variable support every [OIDC Client UserManagerSettings Properties](https://authts.github.io/oidc-client-ts/interfaces/UserManagerSettings.html) which has the following notable properties:
 
 | Property Name | Required | Description |
 | ------ | ------ | ------ |
@@ -58,7 +67,7 @@ Cidaas options variable support every [OIDC Client UserManagerSettings Propertie
 | userStore | no | define where authenticated user information will be saved on the client application. The default value is session storage if no properties is being sent. |
 | automaticSilentRenew | no | configure whether automatic token renewal will be activated. The default value is true. |
 
-an example of Cidaas options variable looks like this:
+an example of Oidc settings variable looks like this:
 
 ```js
 const options = {
@@ -79,9 +88,9 @@ The following storages are supported to store authenticated user information, su
 
 additionally, user can also define custom storage in the client side by implementing Storage class.
 
-If there is no userStore properties being send in Cidaas options variable, it will use session storage by default.
+If there is no userStore properties being send in Oidc settings variable, it will use session storage by default.
 
-In case local storage is prefered to be used, then Cidaas options can be modified as following:
+In case local storage is prefered to be used, then Oidc settings can be modified as following:
 
 ```js
 const options = {
@@ -105,7 +114,7 @@ see [usage](#get-tokens-and-user-profile-information-from-user-storage) to get t
 
 ### Configure automatic token renewal (Optional)
 
-By default, The SDK will generate new tokens based on refresh token stored in user storage, one minute before the access token is expiring. To disable this behaviour, Cidaas options can be modified as following:
+By default, The SDK will generate new tokens based on refresh token stored in user storage, one minute before the access token is expiring. To disable this behaviour, Oidc settings can be modified as following:
 
 ```js
 const options = {
@@ -179,7 +188,7 @@ To login through cidaas sdk, call **loginWithBrowser()**. This will redirect you
 cidaasAuthenticationService.loginWithBrowser();
 ```
 
-once login is successful, it will automatically redirects you to redirect_uri you have configured in cidaas options. You will get information such as code & state as redirect url parameter (query or fragment), which is needed to get access token.
+once login is successful, it will automatically redirects you to redirect_uri you have configured in Oidc settings. You will get information such as code & state as redirect url parameter (query or fragment), which is needed to get access token.
 
 To complete the login process, call **logincallback()**.
 
@@ -209,7 +218,7 @@ cidaasAuthenticationService.getUserInfoFromStorage().then(function(response) {
 
 ### Functions Overview
 
-Cidaas Javascript SDK Functions can be found on the [documentation](https://cidaas.github.io/cidaas-javascript-sdk).
+Cidaas javascript SDK functions can be found on the [documentation](https://cidaas.github.io/cidaas-javascript-sdk).
 
 ## Possible Error
 
