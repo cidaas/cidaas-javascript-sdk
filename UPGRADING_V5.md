@@ -7,6 +7,10 @@ Previously all of javascript sdk functions are called from webauth. Now the func
 
 Example of Cidaas Service:
 ```js
+import { ConfigUserProvider, AuthenticationService, VerificationService, OidcSettings } from 'cidaas-javascript-sdk';
+
+...
+
 export class CidaasService {
     cidaasConfigUserProvider: ConfigUserProvider;
     authenticationService: AuthenticationService;
@@ -62,6 +66,10 @@ Each of the functions and its module can be looked in the [documentation](https:
 As the SDK now using user storage to handle access token, if previously you saved the token manually, check whether there is conflict between access token in user storage & client side implementation. If you don't want to use user storage, you can use InMemoryWebStorage to remove all tokens information from the storage after refreshing the app.
 
 ```js
+import { WebStorageStateStore, InMemoryWebStorage } from "oidc-client-ts";
+
+...
+
 const options = {
     authority: 'your domain base url',
     ...,
