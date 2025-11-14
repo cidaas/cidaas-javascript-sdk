@@ -49,6 +49,8 @@ export interface SocialProviderQueryParameter {
     dc?: string;
     /** Device finger print */
     device_fp?: string;
+    /** Additional custom query parameters */
+    [key: string]: string | undefined;
 }
 
 export interface PasswordlessLoginRequest {

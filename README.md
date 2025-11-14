@@ -202,6 +202,45 @@ cidaasAuthenticationService.loginCallback().then(function(response) {
 
 After successful loginCallback, You will get access token, along with id token and refresh token in the json response, depends on your application configuration.
 
+#### Login With Social Provider
+
+To login with social providers (e.g., Facebook, Google, LinkedIn), initialize the LoginService module and call **loginWithSocial()**. This will redirect you to the social provider's login page.
+
+```js
+cidaasLoginService.loginWithSocial({
+    provider: 'facebook',
+    requestId: 'your requestId'
+});
+```
+
+You can also pass optional query parameters:
+
+```js
+cidaasLoginService.loginWithSocial({
+    provider: 'facebook',
+    requestId: 'your requestId'
+}, {
+    dc: 'device-capacity',
+    device_fp: 'device-fingerprint',
+    // Any additional custom query parameters
+    customParam: 'customValue'
+});
+```
+
+once login is successful, it will automatically redirects you to redirect_uri you have configured in Oidc settings. You will get information such as code & state as redirect url parameter (query or fragment), which is needed to get access token.
+
+To complete the login process, call **logincallback()**.
+
+```js
+cidaasAuthenticationService.loginCallback().then(function(response) {
+    // the response will give you login details.
+}).catch(function(ex) {
+    // your failure code here
+});
+```
+
+After successful loginCallback, You will get access token, along with id token and refresh token in the json response, depends on your application configuration.
+
 There are code documentations for each of the functions with example code of how to call them individually.
 
 #### Get Tokens And User Profile Information From User Storage
