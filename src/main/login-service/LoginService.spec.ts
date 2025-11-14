@@ -115,9 +115,13 @@ test('loginWithSocial throws error when provider is empty', () => {
     provider: '',
     requestId: 'requestId' 
   };
-  expect(() => {
+  try {
     loginService.loginWithSocial(options);
-  }).toThrow('provider and requestId cannot be empty');
+    expect(true).toBe(false); // Should not reach here
+  } catch (ex: any) {
+    expect(ex.errorMessage).toBe('provider and requestId cannot be empty');
+    expect(ex.statusCode).toBe(417);
+  }
 });
 
 test('loginWithSocial throws error when requestId is empty', () => {
@@ -125,9 +129,13 @@ test('loginWithSocial throws error when requestId is empty', () => {
     provider: 'provider',
     requestId: '' 
   };
-  expect(() => {
+  try {
     loginService.loginWithSocial(options);
-  }).toThrow('provider and requestId cannot be empty');
+    expect(true).toBe(false); // Should not reach here
+  } catch (ex: any) {
+    expect(ex.errorMessage).toBe('provider and requestId cannot be empty');
+    expect(ex.statusCode).toBe(417);
+  }
 });
 
 test('registerWithSocial', () => {
@@ -206,9 +214,13 @@ test('registerWithSocial throws error when provider is empty', () => {
     provider: '',
     requestId: 'requestId' 
   };
-  expect(() => {
+  try {
     loginService.registerWithSocial(options);
-  }).toThrow('provider and requestId cannot be empty');
+    expect(true).toBe(false); // Should not reach here
+  } catch (ex: any) {
+    expect(ex.errorMessage).toBe('provider and requestId cannot be empty');
+    expect(ex.statusCode).toBe(417);
+  }
 });
 
 test('registerWithSocial throws error when requestId is empty', () => {
@@ -216,9 +228,13 @@ test('registerWithSocial throws error when requestId is empty', () => {
     provider: 'provider',
     requestId: '' 
   };
-  expect(() => {
+  try {
     loginService.registerWithSocial(options);
-  }).toThrow('provider and requestId cannot be empty');
+    expect(true).toBe(false); // Should not reach here
+  } catch (ex: any) {
+    expect(ex.errorMessage).toBe('provider and requestId cannot be empty');
+    expect(ex.statusCode).toBe(417);
+  }
 });
 
 test('passwordlessLogin', () => {
