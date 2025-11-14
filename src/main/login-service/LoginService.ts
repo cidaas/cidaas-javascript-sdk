@@ -48,10 +48,10 @@ export class LoginService {
 	 * ```
 	 */
 	loginWithSocial(options: SocialProviderPathParameter, queryParams?: SocialProviderQueryParameter) {
+		if (!options.provider || !options.requestId) {
+			throw new CustomException("provider and requestId cannot be empty", 417);
+		}
 		try {
-			if (!options.provider || !options.requestId) {
-				throw new CustomException("provider and requestId cannot be empty", 417);
-			}
 			let _serviceURL = this.config.authority + "/login-srv/social/login/" + options.provider.toLowerCase() + "/" + options.requestId;
 			if (queryParams) {
 				const params = new URLSearchParams();
@@ -68,6 +68,9 @@ export class LoginService {
 			}
 			window.location.href = _serviceURL;
 		} catch (ex) {
+			if (ex instanceof CustomException) {
+				throw ex;
+			}
 			throw new CustomException(String(ex), 417);
 		}
 	}
@@ -88,10 +91,10 @@ export class LoginService {
 	 * ```
 	 */
 	registerWithSocial(options: SocialProviderPathParameter, queryParams?: SocialProviderQueryParameter) {
+		if (!options.provider || !options.requestId) {
+			throw new CustomException("provider and requestId cannot be empty", 417);
+		}
 		try {
-			if (!options.provider || !options.requestId) {
-				throw new CustomException("provider and requestId cannot be empty", 417);
-			}
 			let _serviceURL = this.config.authority + "/login-srv/social/register/" + options.provider.toLowerCase() + "/" + options.requestId;
 			if (queryParams) {
 				const params = new URLSearchParams();
@@ -108,6 +111,9 @@ export class LoginService {
 			}
 			window.location.href = _serviceURL;
 		} catch (ex) {
+			if (ex instanceof CustomException) {
+				throw ex;
+			}
 			throw new CustomException(String(ex), 417);
 		}
 	}
