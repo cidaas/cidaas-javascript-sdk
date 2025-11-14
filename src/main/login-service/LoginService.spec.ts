@@ -3,7 +3,7 @@ import { Helper } from "../common/Helper";
 import { FirstTimeChangePasswordRequest, LoginAfterRegisterRequest, LoginWithCredentialsRequest, PasswordlessLoginRequest, ProgressiveRegistrationHeader, SocialProviderPathParameter, SocialProviderQueryParameter } from './LoginService.model';
 import { LoginPrecheckRequest, VerificationType } from '../common/Common.model';
 import { CidaasUser } from '../common/User.model';
-import { OidcSettings } from '../authentication/Authentication.model';
+import { OidcSettings } from '../authentication-service/AuthenticationService.model';
 import ConfigUserProvider from '../common/ConfigUserProvider';
 
 const authority = 'baseURL';
@@ -48,8 +48,94 @@ test('loginWithSocial', () => {
     device_fp: 'device_fp' 
   };
   loginService.loginWithSocial(options, queryParams);
-  const serviceURL = `${serviceBaseUrl}/social/login/${options.provider.toLowerCase()}/${options.requestId}?dc=${queryParams.dc}&device_fp=${queryParams.device_fp}`;
+  const params = new URLSearchParams();
+  params.append('dc', 'dc');
+  params.append('device_fp', 'device_fp');
+  const serviceURL = `${serviceBaseUrl}/social/login/${options.provider.toLowerCase()}/${options.requestId}?${params.toString()}`;
   expect(window.location.href).toEqual(serviceURL);  
+});
+
+test('loginWithSocial with single query param', () => {
+  Object.defineProperty(window, 'location', {
+    value: {},
+  });
+  const options: SocialProviderPathParameter = { 
+    provider: 'provider',
+    requestId: 'requestId' 
+  };
+  const queryParams: SocialProviderQueryParameter = { 
+    dc: 'dc'
+  };
+  loginService.loginWithSocial(options, queryParams);
+  const params = new URLSearchParams();
+  params.append('dc', 'dc');
+  const serviceURL = `${serviceBaseUrl}/social/login/${options.provider.toLowerCase()}/${options.requestId}?${params.toString()}`;
+  expect(window.location.href).toEqual(serviceURL);  
+});
+
+test('loginWithSocial with custom query params', () => {
+  Object.defineProperty(window, 'location', {
+    value: {},
+  });
+  const options: SocialProviderPathParameter = { 
+    provider: 'provider',
+    requestId: 'requestId' 
+  };
+  const queryParams: SocialProviderQueryParameter = { 
+    dc: 'dc',
+    device_fp: 'device_fp',
+    customParam: 'customValue',
+    anotherParam: 'anotherValue'
+  };
+  loginService.loginWithSocial(options, queryParams);
+  const params = new URLSearchParams();
+  params.append('dc', 'dc');
+  params.append('device_fp', 'device_fp');
+  params.append('customParam', 'customValue');
+  params.append('anotherParam', 'anotherValue');
+  const serviceURL = `${serviceBaseUrl}/social/login/${options.provider.toLowerCase()}/${options.requestId}?${params.toString()}`;
+  expect(window.location.href).toEqual(serviceURL);  
+});
+
+test('loginWithSocial without query params', () => {
+  Object.defineProperty(window, 'location', {
+    value: {},
+  });
+  const options: SocialProviderPathParameter = { 
+    provider: 'provider',
+    requestId: 'requestId' 
+  };
+  loginService.loginWithSocial(options);
+  const serviceURL = `${serviceBaseUrl}/social/login/${options.provider.toLowerCase()}/${options.requestId}`;
+  expect(window.location.href).toEqual(serviceURL);  
+});
+
+test('loginWithSocial throws error when provider is empty', () => {
+  const options: SocialProviderPathParameter = { 
+    provider: '',
+    requestId: 'requestId' 
+  };
+  try {
+    loginService.loginWithSocial(options);
+    expect(true).toBe(false); // Should not reach here
+  } catch (ex: any) {
+    expect(ex.errorMessage).toBe('provider and requestId cannot be empty');
+    expect(ex.statusCode).toBe(417);
+  }
+});
+
+test('loginWithSocial throws error when requestId is empty', () => {
+  const options: SocialProviderPathParameter = { 
+    provider: 'provider',
+    requestId: '' 
+  };
+  try {
+    loginService.loginWithSocial(options);
+    expect(true).toBe(false); // Should not reach here
+  } catch (ex: any) {
+    expect(ex.errorMessage).toBe('provider and requestId cannot be empty');
+    expect(ex.statusCode).toBe(417);
+  }
 });
 
 test('registerWithSocial', () => {
@@ -65,8 +151,90 @@ test('registerWithSocial', () => {
     device_fp: 'device_fp' 
   };
   loginService.registerWithSocial(options, queryParams);
-  const serviceURL = `${serviceBaseUrl}/social/register/${options.provider.toLowerCase()}/${options.requestId}?dc=${queryParams.dc}&device_fp=${queryParams.device_fp}`;
+  const params = new URLSearchParams();
+  params.append('dc', 'dc');
+  params.append('device_fp', 'device_fp');
+  const serviceURL = `${serviceBaseUrl}/social/register/${options.provider.toLowerCase()}/${options.requestId}?${params.toString()}`;
   expect(window.location.href).toEqual(serviceURL);  
+});
+
+test('registerWithSocial with single query param', () => {
+  Object.defineProperty(window, 'location', {
+    value: {},
+  });
+  const options: SocialProviderPathParameter = { 
+    provider: 'provider',
+    requestId: 'requestId' 
+  };
+  const queryParams: SocialProviderQueryParameter = { 
+    device_fp: 'device_fp'
+  };
+  loginService.registerWithSocial(options, queryParams);
+  const params = new URLSearchParams();
+  params.append('device_fp', 'device_fp');
+  const serviceURL = `${serviceBaseUrl}/social/register/${options.provider.toLowerCase()}/${options.requestId}?${params.toString()}`;
+  expect(window.location.href).toEqual(serviceURL);  
+});
+
+test('registerWithSocial with custom query params', () => {
+  Object.defineProperty(window, 'location', {
+    value: {},
+  });
+  const options: SocialProviderPathParameter = { 
+    provider: 'provider',
+    requestId: 'requestId' 
+  };
+  const queryParams: SocialProviderQueryParameter = { 
+    dc: 'dc',
+    customParam: 'customValue'
+  };
+  loginService.registerWithSocial(options, queryParams);
+  const params = new URLSearchParams();
+  params.append('dc', 'dc');
+  params.append('customParam', 'customValue');
+  const serviceURL = `${serviceBaseUrl}/social/register/${options.provider.toLowerCase()}/${options.requestId}?${params.toString()}`;
+  expect(window.location.href).toEqual(serviceURL);  
+});
+
+test('registerWithSocial without query params', () => {
+  Object.defineProperty(window, 'location', {
+    value: {},
+  });
+  const options: SocialProviderPathParameter = { 
+    provider: 'provider',
+    requestId: 'requestId' 
+  };
+  loginService.registerWithSocial(options);
+  const serviceURL = `${serviceBaseUrl}/social/register/${options.provider.toLowerCase()}/${options.requestId}`;
+  expect(window.location.href).toEqual(serviceURL);  
+});
+
+test('registerWithSocial throws error when provider is empty', () => {
+  const options: SocialProviderPathParameter = { 
+    provider: '',
+    requestId: 'requestId' 
+  };
+  try {
+    loginService.registerWithSocial(options);
+    expect(true).toBe(false); // Should not reach here
+  } catch (ex: any) {
+    expect(ex.errorMessage).toBe('provider and requestId cannot be empty');
+    expect(ex.statusCode).toBe(417);
+  }
+});
+
+test('registerWithSocial throws error when requestId is empty', () => {
+  const options: SocialProviderPathParameter = { 
+    provider: 'provider',
+    requestId: '' 
+  };
+  try {
+    loginService.registerWithSocial(options);
+    expect(true).toBe(false); // Should not reach here
+  } catch (ex: any) {
+    expect(ex.errorMessage).toBe('provider and requestId cannot be empty');
+    expect(ex.statusCode).toBe(417);
+  }
 });
 
 test('passwordlessLogin', () => {

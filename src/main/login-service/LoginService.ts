@@ -48,14 +48,30 @@ export class LoginService {
 	 * ```
 	 */
 	loginWithSocial(options: SocialProviderPathParameter, queryParams?: SocialProviderQueryParameter) {
+		if (!options.provider || !options.requestId) {
+			throw new CustomException("provider and requestId cannot be empty", 417);
+		}
 		try {
 			let _serviceURL = this.config.authority + "/login-srv/social/login/" + options.provider.toLowerCase() + "/" + options.requestId;
-			if (queryParams && queryParams.dc && queryParams.device_fp) {
-				_serviceURL = _serviceURL + "?dc=" + queryParams.dc + "&device_fp=" + queryParams.device_fp;
+			if (queryParams) {
+				const params = new URLSearchParams();
+				Object.keys(queryParams).forEach(key => {
+					const value = queryParams[key];
+					if (value !== undefined && value !== null && value !== '') {
+						params.append(key, value);
+					}
+				});
+				const queryString = params.toString();
+				if (queryString) {
+					_serviceURL = _serviceURL + "?" + queryString;
+				}
 			}
 			window.location.href = _serviceURL;
 		} catch (ex) {
-			console.log(ex);
+			if (ex instanceof CustomException) {
+				throw ex;
+			}
+			throw new CustomException(String(ex), 417);
 		}
 	}
 
@@ -75,14 +91,30 @@ export class LoginService {
 	 * ```
 	 */
 	registerWithSocial(options: SocialProviderPathParameter, queryParams?: SocialProviderQueryParameter) {
+		if (!options.provider || !options.requestId) {
+			throw new CustomException("provider and requestId cannot be empty", 417);
+		}
 		try {
 			let _serviceURL = this.config.authority + "/login-srv/social/register/" + options.provider.toLowerCase() + "/" + options.requestId;
-			if (queryParams && queryParams.dc && queryParams.device_fp) {
-				_serviceURL = _serviceURL + "?dc=" + queryParams.dc + "&device_fp=" + queryParams.device_fp;
+			if (queryParams) {
+				const params = new URLSearchParams();
+				Object.keys(queryParams).forEach(key => {
+					const value = queryParams[key];
+					if (value !== undefined && value !== null && value !== '') {
+						params.append(key, value);
+					}
+				});
+				const queryString = params.toString();
+				if (queryString) {
+					_serviceURL = _serviceURL + "?" + queryString;
+				}
 			}
 			window.location.href = _serviceURL;
 		} catch (ex) {
-			console.log(ex);
+			if (ex instanceof CustomException) {
+				throw ex;
+			}
+			throw new CustomException(String(ex), 417);
 		}
 	}
 
