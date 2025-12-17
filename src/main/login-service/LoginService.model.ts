@@ -75,7 +75,7 @@ export interface PasswordlessLoginRequest {
     /** 
      * Link id used to complete Account Linking after successful authentication
      */
-    link_id?: string;
+    'link-id'?: string;
 }
 
 export interface FirstTimeChangePasswordRequest {
