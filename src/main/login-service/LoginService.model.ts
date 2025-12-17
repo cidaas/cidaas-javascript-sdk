@@ -72,6 +72,10 @@ export interface PasswordlessLoginRequest {
      * Either sub or q have to be provided, depends on what is given from the query parameter. 
      */
     q?: string;
+    /** 
+     * Link id used to complete Account Linking after successful authentication
+     */
+    link_id?: string;
 }
 
 export interface FirstTimeChangePasswordRequest {
