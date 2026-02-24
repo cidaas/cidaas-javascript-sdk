@@ -26,7 +26,7 @@ test('initiateAccountVerification', () => {
   const options: InitiateAccountVerificationRequest = {
     sub: '123'
   };
-  const serviceURL = `${serviceBaseUrl}/account/initiate`;
+  const serviceURL = `${actionsServiceBaseUrl}/account/initiation`;
   verificationService.initiateAccountVerification(options);
   expect(createFormSpy).toHaveBeenCalledWith(serviceURL, options);
   expect(submitFormSpy).toHaveBeenCalled();
@@ -37,7 +37,7 @@ test('verifyAccount', () => {
     accvid: 'accvid',
     code: 'code'
   };
-  const serviceURL = `${serviceBaseUrl}/account/verify`;
+  const serviceURL = `${actionsServiceBaseUrl}/account`;
   const headers = {requestId: 'requestId', lat: 'lat value', lon: 'lon value'}
   verificationService.verifyAccount(options, headers);
   expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, false, "POST", undefined, headers);
@@ -109,7 +109,7 @@ test('cancelMFA', () => {
 
 test('getAllVerificationList', () => {
   const accessToken = 'accessToken';
-  const serviceURL = `${serviceBaseUrl}/config/list`;
+  const serviceURL = `${actionsServiceBaseUrl}/config`;
   const headers = {requestId: 'requestId', lat: 'lat value', lon: 'lon value'}
   verificationService.getAllVerificationList(accessToken, headers);
   expect(httpSpy).toHaveBeenCalledWith(undefined, serviceURL, undefined, "GET", accessToken, headers);
@@ -172,7 +172,7 @@ test('initiateMFA', () => {
     request_id: 'request_id',
     type: 'type'
   };
-  const serviceURL = `${serviceBaseUrl}/v2/authenticate/initiate/${options.type}`;
+  const serviceURL = `${serviceBaseUrl}/authentication/${options.type}/initiation`;
   const headers = {requestId: 'requestId', lat: 'lat value', lon: 'lon value'}
   verificationService.initiateMFA(options, headers);
   expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, false, "POST", undefined, headers);
@@ -184,7 +184,7 @@ test('authenticateMFA', () => {
     exchange_id: 'exchange_id',
     pass_code: 'pass_code',
   };
-  const serviceURL = `${serviceBaseUrl}/v2/authenticate/authenticate/${options.type}`;
+  const serviceURL = `${serviceBaseUrl}/authentication/${options.type}/verification`;
   const headers = {requestId: 'requestId', lat: 'lat value', lon: 'lon value'}
   verificationService.authenticateMFA(options, headers);
   expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, undefined, "POST", undefined, headers);
