@@ -1,5 +1,16 @@
 # Changelog
 
+## V5.1.1
+
+### Fixed
+- api adjustments for initiateAccountVerification(), verifyAccount(), getAllVerificationList(), initiateMFA(), authenticateMFA()
+
+## V5.1.0
+
+### Changed
+- improve social login with flexible query parameters
+- update doc
+
 ## V5.0.0
 
 If you are upgrading from v4.x.x,  please see [UPGRADING.md](UPGRADING_V5.md)

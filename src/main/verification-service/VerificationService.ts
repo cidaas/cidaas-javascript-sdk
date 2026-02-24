@@ -32,7 +32,7 @@ export class VerificationService {
 	 */
 	initiateAccountVerification(options: InitiateAccountVerificationRequest) {
 		try {
-			const url = this.config.authority + "/verification-srv/account/initiate";
+			const url = `${this.config.authority}/verification-actions-srv/account/initiation`;
 			const form = Helper.createForm(url, options)
 			document.body.appendChild(form);
 			form.submit();
@@ -57,7 +57,7 @@ export class VerificationService {
 	 * ```
 	 */
 	verifyAccount(options: VerifyAccountRequest, headers?: HTTPRequestHeader) {
-		const _serviceURL = this.config.authority + "/verification-srv/account/verify";
+		const _serviceURL = `${this.config.authority}/verification-actions-srv/account`;
 		return Helper.createHttpPromise(options, _serviceURL, false, "POST", undefined, headers);
 	}
 
@@ -121,7 +121,7 @@ export class VerificationService {
 	 * ```
 	 */
 	getAllVerificationList(access_token?: string, headers?: HTTPRequestHeader) {
-		const _serviceURL = `${this.config.authority}/verification-srv/config/list`;
+		const _serviceURL = `${this.config.authority}/verification-actions-srv/config`;
 		if (access_token) {
 			return Helper.createHttpPromise(undefined, _serviceURL, undefined, "GET", access_token, headers);
 		}
@@ -258,7 +258,7 @@ export class VerificationService {
 	 * ```
 	 */
 	initiateMFA(options: InitiateMFARequest, headers?: HTTPRequestHeader) {
-		const _serviceURL = this.config.authority + "/verification-srv/v2/authenticate/initiate/" + options.type;
+		const _serviceURL = `${this.config.authority}/verification-srv/authentication/${options.type}/initiation`;
 		return Helper.createHttpPromise(options, _serviceURL, false, "POST", undefined, headers);
 	}
 
@@ -281,7 +281,7 @@ export class VerificationService {
 	 * ```
 	 */
 	authenticateMFA(options: AuthenticateMFARequest, headers?: HTTPRequestHeader) {
-		const _serviceURL = this.config.authority + "/verification-srv/v2/authenticate/authenticate/" + options.type;
+		const _serviceURL = `${this.config.authority}/verification-srv/authentication/${options.type}/verification`;
 		return Helper.createHttpPromise(options, _serviceURL, undefined, "POST", undefined, headers);
 	}
 
