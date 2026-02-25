@@ -1,6 +1,6 @@
 # Changelog
 
-## V5.1.1
+## V5.1.2
 
 ### Fixed
 - api adjustments for initiateAccountVerification(), verifyAccount(), getAllVerificationList(), initiateMFA(), authenticateMFA()
