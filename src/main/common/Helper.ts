@@ -36,10 +36,17 @@ export class Helper {
     return new Promise((resolve, reject) => {
       try {
         const http = new XMLHttpRequest();
+        http.onerror = function () {
+          reject(new Error("Network request failed"));
+        };
         http.onreadystatechange = function () {
           if (http.readyState == 4) {
             if (http.responseText) {
-              resolve(JSON.parse(http.responseText));
+              try {
+                resolve(JSON.parse(http.responseText));
+              } catch (parseError) {
+                reject(parseError instanceof Error ? parseError : new Error(String(parseError)));
+              }
             } else {
               resolve(errorResolver);
             }
@@ -88,7 +95,7 @@ export class Helper {
       try {
         userManager.getUser().then( (user: { access_token: string | PromiseLike<string>; }) => {
           resolve(user?.access_token);
-        });
+        }).catch(reject);
       } catch (ex) {
         reject(ex);
       }
