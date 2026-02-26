@@ -82,5 +82,6 @@ export class DeviceService {
             const serviceURL = this.config.authority + '/device-srv/deviceinfo';
             return Helper.createHttpPromise(options, serviceURL, false, 'POST');
         }
+        return Promise.resolve();
     }
 }

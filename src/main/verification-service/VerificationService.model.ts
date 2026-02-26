@@ -90,7 +90,7 @@ export interface EnrollVerificationRequest {
   device_id?: string;
   /** unique identifier of client app, can be found in app setting under admin ui */
   client_id?: string;
-  /** code to authenticae */
+  /** code to authenticate */
   pass_code?: string;
 }
 
@@ -113,7 +113,7 @@ export interface InitiateMFARequest {
   /** Type of authentication */
   usage_type?: string;
   /** medium type */
-  type?: string
+  type?: string;
   /** predetermined custom fields */
   customFields?: {
     [key: string]: string
@@ -130,7 +130,7 @@ export interface AuthenticateMFARequest {
   /** Subject (User) identifier */
   sub?: string;
   /** id generated on Authz request */
-  requestId?: PerformanceServerTiming;
+  requestId?: string;
 }
 
 export interface DeviceInfo {
@@ -177,7 +177,7 @@ export interface ConfigureFriendlyNameRequest {
   id?: string;
   /** physical verification id received from status verification api */
   ph_id?: string;
-  /** id recevied from enrollment API */
+  /** id received from enrollment API */
   device_id?: string;
   /** friendly name for the device */
   friendly_name?: string;

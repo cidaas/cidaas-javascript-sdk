@@ -1,5 +1,10 @@
 # Changelog
 
+## V5.1.3
+
+### Fixed
+- backward-compatible SDK fixes for parsing, promises, and types 
+
 ## V5.1.2
 
 ### Fixed
