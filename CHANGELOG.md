@@ -1,5 +1,10 @@
 # Changelog
 
+## V5.1.4
+
+### Fixed
+- api update for initiateResetPassword(),handleResetPassword(),resetPassword()
+
 ## V5.1.3
 
 ### Fixed
