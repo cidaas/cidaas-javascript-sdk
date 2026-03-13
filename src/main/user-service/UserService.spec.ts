@@ -3,11 +3,12 @@ import { Helper } from '../common/Helper';
 import { CidaasUser } from '../common/User.model';
 import { UserService } from './UserService';
 import { ChangePasswordRequest, CompleteLinkAccountRequest, DeleteUserAccountRequest, GetRegistrationSetupRequest, GetUserActivitiesRequest, HandleResetPasswordRequest, InitiateLinkAccountRequest, InitiateResetPasswordRequest, RegisterRequest, ResetPasswordRequest, UpdateProfileImageRequest, UserActionOnEnrollmentRequest, UserCheckExistsRequest } from './UserService.model';
-import { OidcSettings } from '../authentication/Authentication.model';
+import { OidcSettings } from '../authentication-service/AuthenticationService.model';
 
 const authority = 'baseURL';
 const serviceBaseUrl: string = `${authority}/users-srv`;
 const serviceBaseUrlUsersActions: string = `${authority}/useractions-srv`;
+const serviceBaseUrlPassword: string = `${authority}/password-srv`;
 const createFormSpy = jest.spyOn(Helper, 'createForm');
 const submitFormSpy = jest.spyOn(HTMLFormElement.prototype, 'submit').mockImplementation();
 const httpSpy = jest.spyOn(Helper, 'createHttpPromise');
@@ -113,7 +114,7 @@ test('initiateResetPassword', () => {
 		processingType: 'CODE',
 		requestId: 'requestId'
 	};
-  const serviceURL = `${serviceBaseUrl}/resetpassword/initiate`;
+  const serviceURL = `${serviceBaseUrlPassword}/resetpassword?action=initiatereset`;
   const headers = {requestId: 'requestId', lat: 'lat value', lon: 'lon value'}
   userService.initiateResetPassword(options, headers);
   expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, false, 'POST', undefined, headers);
@@ -125,7 +126,7 @@ test('handleResetPassword', () => {
 		code: 'code'
 	};
   const headers = {requestId: 'requestId', lat: 'lat value', lon: 'lon value'}
-  const serviceURL = `${serviceBaseUrl}/resetpassword/validatecode`;
+  const serviceURL = `${serviceBaseUrlPassword}/resetpassword?action=validatecode`;
   userService.handleResetPassword(options, undefined, headers);
 	expect(createFormSpy).toHaveBeenCalledWith(serviceURL, options);
 	expect(submitFormSpy).toHaveBeenCalled();
@@ -137,7 +138,7 @@ test('handleResetPassword with json response', () => {
 		code: 'code'
 	};
   const headers = {requestId: 'requestId', lat: 'lat value', lon: 'lon value'}
-  const serviceURL = `${serviceBaseUrl}/resetpassword/validatecode`;
+  const serviceURL = `${serviceBaseUrlPassword}/resetpassword?action=validatecode`;
   userService.handleResetPassword(options, true, headers);
   expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, false, 'POST', undefined, headers);
 });
@@ -149,7 +150,7 @@ test('resetPassword', () => {
 		password: 'password',
 		confirmPassword: 'confirmPassword'
 	};
-  const serviceURL = `${serviceBaseUrl}/resetpassword/accept`;
+  const serviceURL = `${serviceBaseUrlPassword}/resetpassword?action=acceptreset`;
   const headers = {requestId: 'requestId', lat: 'lat value', lon: 'lon value'}
   userService.resetPassword(options, undefined, headers);
 	expect(createFormSpy).toHaveBeenCalledWith(serviceURL, options);
@@ -163,7 +164,7 @@ test('resetPassword with json response', () => {
 		password: 'password',
 		confirmPassword: 'confirmPassword'
 	};
-  const serviceURL = `${serviceBaseUrl}/resetpassword/accept`;
+  const serviceURL = `${serviceBaseUrlPassword}/resetpassword?action=acceptreset`;
   const headers = {requestId: 'requestId', lat: 'lat value', lon: 'lon value'}
   userService.resetPassword(options, true, headers);
   expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, false, 'POST', undefined, headers);

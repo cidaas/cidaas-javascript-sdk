@@ -141,7 +141,7 @@ export class UserService {
 
 	/**
 	 * To initiate the password resetting, call **initiateResetPassword()**. This will send verification code to your email or mobile based on the resetMedium you mentioned.
-	 * Please refer to the api document https://docs.cidaas.com/docs/cidaas-iam/6b29bac6002f4-initiate-password-reset for more details.
+	 * Please refer to the api document https://docs.cidaas.com/openapi/password-management/post-reset-password-initiate for more details.
 	 * @example
 	 * ```js
 	 * cidaasUserService.initiateResetPassword({
@@ -157,13 +157,13 @@ export class UserService {
 	 * ```
 	 */
 	initiateResetPassword(options: InitiateResetPasswordRequest, headers?: HTTPRequestHeader) {
-		const _serviceURL = this.config.authority + "/users-srv/resetpassword/initiate";
+		const _serviceURL = this.config.authority + "/password-srv/resetpassword?action=initiatereset";
 		return Helper.createHttpPromise(options, _serviceURL, false, "POST", undefined, headers);
 	}
 
 	/**
 	 * To handle the reset password by entering the verification code you received, call **handleResetPassword()**. This will check if your verification code was valid or not, and allows you to proceed to the next step.
-	 * Please refer to the api document https://docs.cidaas.com/docs/cidaas-iam/3t8ztokeb7cfz-handle-reset-password for more details.
+	 * Please refer to the api document https://docs.cidaas.com/openapi/password-management/post-reset-password-validatecode for more details.
 	 * @example
 	 * ```js
 	 * const handleResponseAsJson = 'true if the response need to be handled the old way (as json). In the current handling, the response information will be given as query parameter in redirect url.';
@@ -179,7 +179,7 @@ export class UserService {
 	 */
 	handleResetPassword(options: HandleResetPasswordRequest, handleResponseAsJson?: boolean, headers?: HTTPRequestHeader) {
 		try {
-			const url = this.config.authority + "/users-srv/resetpassword/validatecode";
+			const url = this.config.authority + "/password-srv/resetpassword?action=validatecode";
 			if (!handleResponseAsJson) {
 				// current handling will redirect and give query parameters
 				const form = Helper.createForm(url, options)
@@ -196,7 +196,7 @@ export class UserService {
 
 	/**
 	 * To finish reseting the password, call **resetPassword()**. This will allow you to change your password.
-	 * Please refer to the api document https://docs.cidaas.com/docs/cidaas-iam/qa9ny0gkzlf6y-accept-reset-password for more details.
+	 * Please refer to the api document https://docs.cidaas.com/openapi/password-management/post-reset-password-accept for more details.
 	 * @example
 	 * ```js
 	 * const handleResponseAsJson = 'true if the response need to be handled the old way (as json). In the current handling, user will be redirected to success page after successful reset password.';
@@ -213,7 +213,7 @@ export class UserService {
 	 * ```
 	 */
 	resetPassword(options: ResetPasswordRequest, handleResponseAsJson?: boolean, headers?: HTTPRequestHeader) {
-		const url = this.config.authority + "/users-srv/resetpassword/accept";
+		const url = this.config.authority + "/password-srv/resetpassword?action=acceptreset";
 		try {
 			if (!handleResponseAsJson) {
 				// current handling will redirect and give query parameters
