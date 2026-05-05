@@ -1,5 +1,10 @@
 # Changelog
 
+## V5.2.0
+
+### Added
+- add getMissingFields() function to public service
+
 ## V5.1.4
 
 ### Fixed
