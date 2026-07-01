@@ -17,7 +17,28 @@ export enum VerificationType {
     BackupCode = 'BACKUPCODE',
     Pattern = 'PATTERN',
     Push = 'PUSH',
+    Chat = 'CHAT',
     Voice = 'VOICE',
+}
+
+/**
+ * Describes why authentication is being initiated.
+ * Sent as `usage_type` to verification-srv/authentication/{method}/initiation.
+ */
+export enum UsageType {
+    /**
+     * First-factor login before the user is fully authenticated.
+     * Use for passwordless login and when sending a unified `identifier` (required for that field).
+     * Preferred over `PasswordlessAuthentication`.
+     */
+    InitialAuthentication = 'INITIAL_AUTHENTICATION',
+    /**
+     * Legacy first-factor passwordless login usage type.
+     * @deprecated Use `InitialAuthentication` instead. Still accepted by verification-srv for backward compatibility.
+     */
+    PasswordlessAuthentication = 'PASSWORDLESS_AUTHENTICATION',
+    /** Additional verification step during an existing login session (MFA screen). */
+    MultifactorAuthentication = 'MULTIFACTOR_AUTHENTICATION',
 }
 export interface HTTPRequestHeader {
     /** Request id returned from the authorization call */

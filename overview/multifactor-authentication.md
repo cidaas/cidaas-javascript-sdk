@@ -1,15 +1,19 @@
 # Multifactor Authentication
 
-Cidaas javascript SDK provides functions which calls cidaas api for managing multifactor authentication as following:
+Cidaas javascript SDK provides functions which call cidaas APIs for login-time authentication (verification-srv `/authentication/{method}/...`).
 
-| SDK Function | Description |
-|----------------- | ----------------------- |
-|  getMFAList | Get all mfa, which has been configured by current active user |
-|  getAllVerificationList | Get all mfa possibilities for the client app |
+| SDK Function (preferred) | Deprecated alias | Description |
+|----------------- | ----------------------- | ----------------------- |
+| getConfiguredAuthenticationMethods | getMFAList | Methods configured for the current user (pre-login / MFA screen) |
+| getAllVerificationMethods | getAllVerificationList | Verification methods configured for the client app |
 
-## MFA Verification
+> **v6:** See [UPGRADING_V6.md](../UPGRADING_V6.md) for migration from v5.x.
 
-By calling initiateMFA(), user will start MFA verification process. From here user will be able to either complete the MFA process or cancel it. By calling authenticateMFA() and finishing authentication e.g. by providing pass code, the MFA verification process will be completed. Whereas calling cancelMFA() will cancel and end the verification process.
+## Authentication verification
+
+Call **initiateAuthentication(method, options)** to start a step, then **verifyAuthentication(method, options)** to complete it, or **cancelAuthentication(method, options)** to abort.
+
+Deprecated equivalents: `initiateMFA()`, `authenticateMFA()`, `cancelMFA()`.
 
 ```mermaid
 ---
@@ -24,7 +28,7 @@ sequenceDiagram
 User ->> ClientApp: login
 
 activate ClientApp
-ClientApp ->> CidaasSDK: call initiateMFA()
+ClientApp ->> CidaasSDK: call initiateAuthentication()
 deactivate ClientApp
 
 activate CidaasSDK
@@ -40,7 +44,7 @@ alt Cancel MFA Process
     User ->> ClientApp: cancel MFA
 
     activate ClientApp
-    ClientApp ->> CidaasSDK: call cancelMFA()
+    ClientApp ->> CidaasSDK: call cancelAuthentication()
     deactivate ClientApp
 
     activate CidaasSDK
@@ -54,7 +58,7 @@ else Complete MFA Process
     User ->> ClientApp: authenticate MFA
 
     activate ClientApp
-    ClientApp ->> CidaasSDK: call authenticateMFA()
+    ClientApp ->> CidaasSDK: call verifyAuthentication()
     deactivate ClientApp
 
     activate CidaasSDK
@@ -69,7 +73,11 @@ end
 
 ## Enroll new Authentication Method
 
-To enroll a new MFA method, you can call initiateEnrollment() function. This will generate exchange id, which will be used by enrollVerification() to complete enrollment process.
+To enroll a new method, call **initiateEnrollment(method, options, trackId?)**, then **verifyEnrollment(method, options)**.
+
+Uses `verification-actions-srv/setup/{method}/initiation` and `.../verification`.
+
+Deprecated: `initiateVerification`, `configureVerification`, `enrollVerification`, `configureFriendlyName`.
 
 ```mermaid
 ---
@@ -96,7 +104,7 @@ CidaasAPI -->> ClientApp: exchange id
 deactivate CidaasAPI
 
 activate ClientApp
-ClientApp ->> CidaasSDK: call enrollVerification()
+ClientApp ->> CidaasSDK: call verifyEnrollment()
 deactivate ClientApp
 
 activate CidaasSDK

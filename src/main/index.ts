@@ -16,8 +16,8 @@ import { TokenHeader, TokenClaim, Group, Consent, GrantType, GenerateTokenFromCo
 import { UserService } from "./user-service/UserService";
 import { GetUserProfileRequest, GetRegistrationSetupRequest, RegisterRequest, GetInviteUserDetailsRequest, GetCommunicationStatusRequest, InitiateResetPasswordRequest, HandleResetPasswordRequest, ResetPasswordRequest, GetDeduplicationDetailsRequest, RegisterDeduplicationRequest, DeduplicationLoginRequest, ChangePasswordRequest, InitiateLinkAccountRequest, DeleteUserAccountRequest, CompleteLinkAccountRequest, UserCheckExistsRequest, GetUserActivitiesRequest, UserActionOnEnrollmentRequest, UpdateProfileImageRequest, DateFilter, ResetMedium } from "./user-service/UserService.model";
 import { VerificationService } from "./verification-service/VerificationService";
-import { InitiateAccountVerificationRequest, VerifyAccountRequest, GetMFAListRequest, CancelMFARequest, InitiateEnrollmentRequest, EnrollVerificationRequest, CheckVerificationTypeConfiguredRequest, InitiateMFARequest, AuthenticateMFARequest, DeviceInfo, Location, FIDO2EnrollEntity, InitiateVerificationRequest, ConfigureVerificationRequest, ConfigureFriendlyNameRequest } from "./verification-service/VerificationService.model";
-import { LoginPrecheckRequest, VerificationType, HTTPRequestHeader, ProcessingType } from "./common/Common.model";
+import { InitiateAccountVerificationRequest, VerifyAccountRequest, GetConfiguredAuthenticationMethodsRequest, CancelAuthenticationRequest, InitiateEnrollmentRequest, VerifyEnrollmentRequest, CheckVerificationTypeConfiguredRequest, InitiateAuthenticationRequest, VerifyAuthenticationRequest, UpdateEnrollmentFriendlyNameRequest, FIDO2AuthenticateEntity, FIDO2ClientResponse, DeviceInfo, Location, FIDO2EnrollEntity } from "./verification-service/VerificationService.model";
+import { LoginPrecheckRequest, VerificationType, UsageType, HTTPRequestHeader, ProcessingType } from "./common/Common.model";
 import { CidaasUser, UserAddress, UserMobile, UserGroupMap } from "./common/User.model";
 
 export { 
@@ -39,7 +39,7 @@ export {
     UserService,
     GetUserProfileRequest, GetRegistrationSetupRequest, RegisterRequest, GetInviteUserDetailsRequest, GetCommunicationStatusRequest, InitiateResetPasswordRequest, HandleResetPasswordRequest, ResetPasswordRequest, GetDeduplicationDetailsRequest, RegisterDeduplicationRequest, DeduplicationLoginRequest, ChangePasswordRequest, InitiateLinkAccountRequest, DeleteUserAccountRequest, CompleteLinkAccountRequest, UserCheckExistsRequest, GetUserActivitiesRequest, UserActionOnEnrollmentRequest, UpdateProfileImageRequest, DateFilter, ResetMedium,
     VerificationService,
-    InitiateAccountVerificationRequest, VerifyAccountRequest, GetMFAListRequest, CancelMFARequest, InitiateEnrollmentRequest, EnrollVerificationRequest, CheckVerificationTypeConfiguredRequest, InitiateMFARequest, AuthenticateMFARequest, DeviceInfo, Location, FIDO2EnrollEntity, InitiateVerificationRequest, ConfigureVerificationRequest, ConfigureFriendlyNameRequest,
-    LoginPrecheckRequest, VerificationType, HTTPRequestHeader, ProcessingType,
+    InitiateAccountVerificationRequest, VerifyAccountRequest, GetConfiguredAuthenticationMethodsRequest, CancelAuthenticationRequest, InitiateEnrollmentRequest, VerifyEnrollmentRequest, CheckVerificationTypeConfiguredRequest, InitiateAuthenticationRequest, VerifyAuthenticationRequest, UpdateEnrollmentFriendlyNameRequest, FIDO2AuthenticateEntity, FIDO2ClientResponse, DeviceInfo, Location, FIDO2EnrollEntity,
+    LoginPrecheckRequest, VerificationType, UsageType, HTTPRequestHeader, ProcessingType,
     CidaasUser, UserAddress, UserMobile, UserGroupMap
 };

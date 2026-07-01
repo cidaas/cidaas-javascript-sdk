@@ -86,6 +86,8 @@ export class PublicService {
 
     /**
      * Fetches missing fields for progressive registration from the public trackinfo API.
+     * Use when `requestId` is available (social registration flow); otherwise use `TokenService.getMissingFields(trackId)`.
+     * Maps to `GET /public-srv/public/trackinfo/{requestId}/{trackId}`.
      * @param requestId - Request id from cidaas
      * @param trackId - Track id for the registration flow
      *

@@ -1,6 +1,6 @@
 import { VerificationService }  from './VerificationService';
 import { Helper } from "../common/Helper";
-import { AuthenticateMFARequest,  CancelMFARequest, CheckVerificationTypeConfiguredRequest, ConfigureFriendlyNameRequest, ConfigureVerificationRequest, EnrollVerificationRequest, GetMFAListRequest, InitiateAccountVerificationRequest, InitiateEnrollmentRequest, InitiateMFARequest, InitiateVerificationRequest, VerifyAccountRequest } from './VerificationService.model';
+import { CancelAuthenticationRequest, CheckVerificationTypeConfiguredRequest, GetConfiguredAuthenticationMethodsRequest, InitiateAccountVerificationRequest, InitiateAuthenticationRequest, UpdateEnrollmentFriendlyNameRequest, VerifyAccountRequest, VerifyAuthenticationRequest } from './VerificationService.model';
 import { OidcSettings } from '../authentication/Authentication.model';
 import ConfigUserProvider from '../common/ConfigUserProvider';
 
@@ -43,93 +43,99 @@ test('verifyAccount', () => {
   expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, false, "POST", undefined, headers);
 });
 
-describe('getMFAList', () => {
-  test('getMFAListWithEmail', () => {
-    const options: GetMFAListRequest = {
+describe('getConfiguredAuthenticationMethods', () => {
+  test('withEmail', () => {
+    const options: GetConfiguredAuthenticationMethodsRequest = {
       request_id: 'request_id',
       email: 'email'
     };
-    const serviceURL = `${serviceBaseUrl}/v2/setup/public/configured/list`;
-    verificationService.getMFAList(options);
+    const serviceURL = `${serviceBaseUrl}/public/graph/user/setup`;
+    verificationService.getConfiguredAuthenticationMethods(options);
     expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, false, "POST", undefined, undefined);
   });
-  
-  test('getMFAListWithMobile', () => {
-    const options: GetMFAListRequest = {
+
+  test('withMobile', () => {
+    const options: GetConfiguredAuthenticationMethodsRequest = {
       request_id: 'request_id',
       mobile_number: 'mobile_number'
     };
-    const serviceURL = `${serviceBaseUrl}/v2/setup/public/configured/list`;
-    verificationService.getMFAList(options);
+    const serviceURL = `${serviceBaseUrl}/public/graph/user/setup`;
+    verificationService.getConfiguredAuthenticationMethods(options);
     expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, false, "POST", undefined, undefined);
   });
-  
-  test('getMFAListWithUsername', () => {
-    const options: GetMFAListRequest = {
+
+  test('withUsername', () => {
+    const options: GetConfiguredAuthenticationMethodsRequest = {
       request_id: 'request_id',
       username: 'username'
     };
-    const serviceURL = `${serviceBaseUrl}/v2/setup/public/configured/list`;
-    verificationService.getMFAList(options);
+    const serviceURL = `${serviceBaseUrl}/public/graph/user/setup`;
+    verificationService.getConfiguredAuthenticationMethods(options);
     expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, false, "POST", undefined, undefined);
   });
-  
-  test('getMFAListWithMaskedSub', () => {
-    const options: GetMFAListRequest = {
+
+  test('withMaskedSub', () => {
+    const options: GetConfiguredAuthenticationMethodsRequest = {
       request_id: 'request_id',
       sub: 'masked sub'
     };
-    const serviceURL = `${serviceBaseUrl}/v2/setup/public/configured/list`;
-    verificationService.getMFAList(options);
+    const serviceURL = `${serviceBaseUrl}/public/graph/user/setup`;
+    verificationService.getConfiguredAuthenticationMethods(options);
     expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, false, "POST", undefined, undefined);
   });
 
-  test('getMFAListWithQ', () => {
-    const options: GetMFAListRequest = {
+  test('withQ', () => {
+    const options: GetConfiguredAuthenticationMethodsRequest = {
       request_id: 'request_id',
       q: 'masked sub'
     };
-    const serviceURL = `${serviceBaseUrl}/v2/setup/public/configured/list`;
-    verificationService.getMFAList(options);
+    const serviceURL = `${serviceBaseUrl}/public/graph/user/setup`;
+    verificationService.getConfiguredAuthenticationMethods(options);
     expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, false, "POST", undefined, undefined);
   });
 });
 
-test('cancelMFA', () => {
-  const options: CancelMFARequest = {
+test('cancelAuthentication', () => {
+  const options: CancelAuthenticationRequest = {
     exchange_id: 'exchange_id',
     reason: 'reason',
-    type: 'type'
+    type: 'email'
   };
-  const serviceURL = `${serviceBaseUrl}/v2/authenticate/cancel/${options.type}`;
+  const serviceURL = `${serviceBaseUrl}/authentication/email/cancel`;
   const headers = {requestId: 'requestId', lat: 'lat value', lon: 'lon value'}
-  verificationService.cancelMFA(options, headers);
-  expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, undefined, "POST", undefined, headers);
+  verificationService.cancelAuthentication('email', { exchange_id: options.exchange_id, reason: options.reason }, headers);
+  expect(httpSpy).toHaveBeenCalledWith({ exchange_id: options.exchange_id, reason: options.reason }, serviceURL, undefined, "POST", undefined, headers);
 });
 
-test('getAllVerificationList', () => {
+test('getAllVerificationMethods', () => {
   const accessToken = 'accessToken';
   const serviceURL = `${actionsServiceBaseUrl}/config`;
   const headers = {requestId: 'requestId', lat: 'lat value', lon: 'lon value'}
-  verificationService.getAllVerificationList(accessToken, headers);
+  verificationService.getAllVerificationMethods(accessToken, headers);
   expect(httpSpy).toHaveBeenCalledWith(undefined, serviceURL, undefined, "GET", accessToken, headers);
 });
 
-test('initiateEnrollment', () => {
-  const options: InitiateEnrollmentRequest = {
-    verification_type: 'verification_type',
+test('initiateEnrollment with access token', () => {
+  const method = 'fido2';
+  const options = {
     deviceInfo: {
-      deviceId: 'deviceId', 
-      location: {
-        lat: 'lat', 
-        lon: 'lon'
-      }
+      deviceId: 'deviceId',
+      location: { lat: 'lat', lon: 'lon' }
     }
   };
   const accessToken = 'accessToken';
-  const serviceURL = `${serviceBaseUrl}/v2/setup/initiate/${options.verification_type}`;
-  verificationService.initiateEnrollment(options, accessToken);
-  expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, undefined, "POST", accessToken);
+  const serviceURL = `${actionsServiceBaseUrl}/setup/${method}/initiation`;
+  verificationService.initiateEnrollment(method, options, undefined, accessToken);
+  expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, undefined, 'POST', accessToken);
+});
+
+test('initiateEnrollment with trackId', () => {
+  const method = 'email';
+  const options = { email: 'email' };
+  const trackId = 'trackId';
+  const serviceURL = `${actionsServiceBaseUrl}/setup/${method}/initiation/${trackId}`;
+  verificationService.initiateEnrollment(method, options, trackId);
+  expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, undefined, 'POST');
 });
 
 test('getEnrollmentStatus', () => {
@@ -141,17 +147,17 @@ test('getEnrollmentStatus', () => {
   expect(httpSpy).toHaveBeenCalledWith(undefined, serviceURL, undefined, "POST", accessToken, headers);
 });
 
-test('enrollVerification', () => {
-  const options: EnrollVerificationRequest = {
+test('verifyEnrollment', () => {
+  const method = 'fido2';
+  const options = {
     exchange_id: 'exchange_id',
     device_id: 'device_id',
     client_id: 'client_id',
     pass_code: 'pass_code',
     fido2_client_response: {},
-    verification_type: 'verification_type'
   };
-  const serviceURL = `${serviceBaseUrl}/v2/setup/enroll/${options.verification_type}`;
-  verificationService.enrollVerification(options);
+  const serviceURL = `${actionsServiceBaseUrl}/setup/${method}/verification`;
+  verificationService.verifyEnrollment(method, options);
   expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, undefined, "POST");
 });
 
@@ -166,61 +172,38 @@ test('checkVerificationTypeConfigured', () => {
   expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, undefined, "POST");
 });
 
-test('initiateMFA', () => {
-  const options: InitiateMFARequest = {
+test('initiateAuthentication', () => {
+  const options: Omit<InitiateAuthenticationRequest, 'type'> = {
     usage_type: 'usage_type',
     request_id: 'request_id',
-    type: 'type'
   };
-  const serviceURL = `${serviceBaseUrl}/authentication/${options.type}/initiation`;
+  const method = 'email';
+  const serviceURL = `${serviceBaseUrl}/authentication/${method}/initiation`;
   const headers = {requestId: 'requestId', lat: 'lat value', lon: 'lon value'}
-  verificationService.initiateMFA(options, headers);
+  verificationService.initiateAuthentication(method, options, headers);
   expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, false, "POST", undefined, headers);
 });
 
-test('authenticateMFA', () => {
-  const options: AuthenticateMFARequest = {
-    type: 'type',
+test('verifyAuthentication', () => {
+  const options: Omit<VerifyAuthenticationRequest, 'type'> = {
     exchange_id: 'exchange_id',
     pass_code: 'pass_code',
   };
-  const serviceURL = `${serviceBaseUrl}/authentication/${options.type}/verification`;
+  const method = 'email';
+  const serviceURL = `${serviceBaseUrl}/authentication/${method}/verification`;
   const headers = {requestId: 'requestId', lat: 'lat value', lon: 'lon value'}
-  verificationService.authenticateMFA(options, headers);
+  verificationService.verifyAuthentication(method, options, headers);
   expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, undefined, "POST", undefined, headers);
 });
 
-test('initiateVerification', () => {
-  const options: InitiateVerificationRequest = {
-    email: 'email'
-  };
-  const trackId = 'trackId';
-  const method = 'method';
-  const serviceURL = `${actionsServiceBaseUrl}/setup/${method}/initiate/${trackId}`;
-  verificationService.initiateVerification(options, trackId, method);
-  expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, undefined, 'POST');
-});
-
-test('configureVerification', () => {
-  const options: ConfigureVerificationRequest = {
-    exchange_id: 'exchangeId',
-    sub: 'sub',
-    pass_code: 'passCode'
-  };
-  const method = 'method';
-  const serviceURL = `${actionsServiceBaseUrl}/setup/${method}/verification`;
-  verificationService.configureVerification(options, method);
-  expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, undefined, 'POST');
-});
-
-test('configureFriendlyName', () => {
-  const options: ConfigureFriendlyNameRequest = {
+test('updateEnrollmentFriendlyName', () => {
+  const options: UpdateEnrollmentFriendlyNameRequest = {
     sub: 'sub',
     friendly_name: 'friendly name'
   };
   const trackId = 'trackId';
-  const method = 'method';
+  const method = 'email';
   const serviceURL = `${actionsServiceBaseUrl}/setup/users/friendlyname/${method.toUpperCase()}/${trackId}`;
-  verificationService.configureFriendlyName(options, trackId, method);
+  verificationService.updateEnrollmentFriendlyName(method, options, trackId);
   expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, undefined, 'PUT');
 });
