@@ -9,15 +9,11 @@ If you are upgrading from v5.x.x, please see [UPGRADING_V6.md](UPGRADING_V6.md).
 - **Breaking** `getConfiguredAuthenticationMethods` now calls `POST /verification-srv/public/graph/user/setup` (was `/v2/setup/public/configured/list`).
 - **Breaking** `cancelAuthentication` now calls `POST /verification-srv/authentication/{method}/cancel` (was `/v2/authenticate/cancel/{method}`).
 - `initiateEnrollment` canonical path uses `.../initiation[/{trackId}]` (was `.../initiate/{trackId}` for suggest-verification).
+- Update `oidc-client-ts` from `^3.1.0` to `^3.5.0` (uses browser `crypto.subtle` instead of `crypto-js`; requires HTTPS for OIDC crypto operations).
+- Require Node.js `>=18` for SDK development and CI (`engines`; was incorrectly listed as `>=8.9.10` under `engine`).
 
 ### Removed
 - **Breaking** Removed deprecated v5 `VerificationService` methods: `getMFAList`, `initiateMFA`, `authenticateMFA`, `cancelMFA`, `getAllVerificationList`, legacy enrollment helpers (`initiateVerification`, `enrollVerification`, `configureVerification`, `configureFriendlyName`).
-
-## Unreleased
-
-### Changed
-- Update `oidc-client-ts` from `^3.1.0` to `^3.5.0` (uses browser `crypto.subtle` instead of `crypto-js`; requires HTTPS for OIDC crypto operations).
-- Require Node.js `>=18` for SDK development and CI (`engines`; was incorrectly listed as `>=8.9.10` under `engine`).
 
 ## V5.2.0
 
