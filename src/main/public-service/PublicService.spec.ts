@@ -88,3 +88,12 @@ test('getClientInfo', () => {
     publicService.getClientInfo(options);
     expect(httpSpy).toHaveBeenCalledWith(undefined, serviceURL, false, 'GET');
 });
+
+test('getMissingFields', () => {
+    const requestId = 'requestId';
+    const trackId = 'trackId';
+    const headers = { requestId: 'requestId' };
+    const serviceURL = `${authority}/public-srv/public/trackinfo/${requestId}/${trackId}`;
+    publicService.getMissingFields(requestId, trackId, headers);
+    expect(httpSpy).toHaveBeenCalledWith(undefined, serviceURL, false, 'GET', undefined, headers);
+});

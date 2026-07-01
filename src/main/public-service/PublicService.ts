@@ -1,5 +1,6 @@
 import { OidcSettings } from "../authentication-service/AuthenticationService.model";
 import ConfigUserProvider from "../common/ConfigUserProvider";
+import { HTTPRequestHeader } from "../common/Common.model";
 import { Helper } from "../common/Helper";
 import { GetRequestIdRequest, GetClientInfoRequest } from "./PublicService.model";
 
@@ -81,6 +82,16 @@ export class PublicService {
     getClientInfo(options: GetClientInfoRequest) {
         const _serviceURL = this.config.authority + "/public-srv/public/" + options.requestId;
         return Helper.createHttpPromise(undefined, _serviceURL, false, "GET");
+    }
+
+    /**
+     * Returns missing registration fields after social-provider login.
+     * Use when `requestId` is available (social registration flow); otherwise use `TokenService.getMissingFields(trackId)`.
+     * Maps to `GET /public-srv/public/trackinfo/{requestId}/{trackId}`.
+     */
+    getMissingFields(requestId: string, trackId: string, headers?: HTTPRequestHeader) {
+        const _serviceURL = this.config.authority + "/public-srv/public/trackinfo/" + requestId + "/" + trackId;
+        return Helper.createHttpPromise(undefined, _serviceURL, false, "GET", undefined, headers);
     }
 
 }
