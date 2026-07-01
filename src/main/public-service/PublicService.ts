@@ -1,6 +1,6 @@
 import { OidcSettings } from "../authentication-service/AuthenticationService.model";
-import ConfigUserProvider from "../common/ConfigUserProvider";
 import { HTTPRequestHeader } from "../common/Common.model";
+import ConfigUserProvider from "../common/ConfigUserProvider";
 import { Helper } from "../common/Helper";
 import { GetRequestIdRequest, GetClientInfoRequest } from "./PublicService.model";
 
@@ -85,12 +85,26 @@ export class PublicService {
     }
 
     /**
-     * Returns missing registration fields after social-provider login.
+     * Fetches missing fields for progressive registration from the public trackinfo API.
      * Use when `requestId` is available (social registration flow); otherwise use `TokenService.getMissingFields(trackId)`.
      * Maps to `GET /public-srv/public/trackinfo/{requestId}/{trackId}`.
+     * @param requestId - Request id from cidaas
+     * @param trackId - Track id for the registration flow
+     *
+     * @example
+     * ```js
+     * const requestId = 'request id from cidaas';
+     * const trackId = 'your track id';
+     * cidaasPublicService.getMissingFields(requestId, trackId).then(function (resp) {
+     *   // your success code
+     * }).catch(function(ex) {
+     *   // your failure code
+     * });
+     * ```
      */
     getMissingFields(requestId: string, trackId: string, headers?: HTTPRequestHeader) {
-        const _serviceURL = this.config.authority + "/public-srv/public/trackinfo/" + requestId + "/" + trackId;
+        const _serviceURL =
+            this.config.authority + "/public-srv/public/trackinfo/" + requestId + "/" + trackId;
         return Helper.createHttpPromise(undefined, _serviceURL, false, "GET", undefined, headers);
     }
 

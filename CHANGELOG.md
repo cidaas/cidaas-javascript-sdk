@@ -18,7 +18,11 @@ If you are upgrading from v5.x.x, please see [UPGRADING_V6.md](UPGRADING_V6.md).
 ### Changed
 - Update `oidc-client-ts` from `^3.1.0` to `^3.5.0` (uses browser `crypto.subtle` instead of `crypto-js`; requires HTTPS for OIDC crypto operations).
 - Require Node.js `>=18` for SDK development and CI (`engines`; was incorrectly listed as `>=8.9.10` under `engine`).
-- Restore `PublicService.getMissingFields(requestId, trackId)` for social-provider progressive registration (`GET /public-srv/public/trackinfo/...`).
+
+## V5.2.0
+
+### Added
+- add getMissingFields() function to public service
 
 ## V5.1.4
 
