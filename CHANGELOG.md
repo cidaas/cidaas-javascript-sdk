@@ -1,5 +1,10 @@
 # Changelog
 
+## V6.0.1
+
+### Changed
+- update apis which are called by `UserService` methods: `getRegistrationSetup`  and `register`
+
 ## V6.0.0
 
 If you are upgrading from v5.x.x, please see [UPGRADING_V6.md](UPGRADING_V6.md).

@@ -38,7 +38,7 @@ test('getRegistrationSetup', () => {
     acceptlanguage: 'acceptlanguage',
     requestId: 'requestId'
   };
-  const serviceURL = `${authority}/registration-setup-srv/public/list?acceptlanguage=${options.acceptlanguage}&requestId=${options.requestId}`;
+  const serviceURL = `${authority}/user-srv/public/fields?ui_locales=${options.acceptlanguage}&requestId=${options.requestId}`;
   userService.getRegistrationSetup(options);
   expect(httpSpy).toHaveBeenCalledWith(undefined, serviceURL, false, 'GET');
 });
@@ -56,7 +56,7 @@ test('register', () => {
     lat: 'latitude',
     lon: 'longitude'
 	}
-  const serviceURL = `${serviceBaseUrl}/register`;
+  const serviceURL = `${serviceBaseUrlUsersActions}/registration`;
   userService.register(options, headers);
   expect(httpSpy).toHaveBeenCalledWith(options, serviceURL, false, 'POST', undefined, headers);
 });

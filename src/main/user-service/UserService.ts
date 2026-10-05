@@ -53,7 +53,7 @@ export class UserService {
    * ```
    */
 	getRegistrationSetup(options: GetRegistrationSetupRequest) {
-		const serviceURL = this.config.authority + '/registration-setup-srv/public/list?acceptlanguage=' + options.acceptlanguage + '&requestId=' + options.requestId;
+		const serviceURL = this.config.authority + '/user-srv/public/fields?ui_locales=' + options.acceptlanguage + '&requestId=' + options.requestId;
 		return Helper.createHttpPromise(undefined, serviceURL, false, 'GET');
 	}
 
@@ -86,7 +86,7 @@ export class UserService {
 	 *```
 	 */
 	register(options: RegisterRequest, headers: HTTPRequestHeader) {
-		let _serviceURL = this.config.authority + "/users-srv/register";
+		let _serviceURL = this.config.authority + "/useractions-srv/registration";
 		if (options.invite_id) {
 			_serviceURL = _serviceURL + "?invite_id=" + options.invite_id;
 		}

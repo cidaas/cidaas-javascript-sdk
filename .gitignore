@@ -7,3 +7,7 @@ minified
 .idea
 .DS_Store
 *.tgz
+.gitnexus
+.claude
+AGENTS.md
+CLAUDE.md
